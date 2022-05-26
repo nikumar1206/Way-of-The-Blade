@@ -1,0 +1,1 @@
+{"version":3,"file":"main.js","mappings":"AAAAA,OAAOC,iBAAiB,oBAAoB,SAACC,GACzCC,QAAQC,IAAI","sources":["webpack://way_of_the_blade/./src/index.js"],"sourcesContent":["window.addEventListener('DOMContentLoaded', (event) => {\n    console.log('DOM fully loaded and parsed');\n});\n\n"],"names":["window","addEventListener","event","console","log"],"sourceRoot":""}
