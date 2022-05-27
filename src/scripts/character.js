@@ -13,14 +13,14 @@ export class Character {
 
     draw(ctx) {
         ctx.fillStyle = "green"
-        ctx.fillRect(this.posX, this.posY, 25, 125)
+        ctx.fillRect(this.posX, this.posY, 25, 100)
     }
 
     wrap() {
         if (this.posX < 25) {
             this.posX = 1024 - 25
-        } else if (this.posX > 975) {
-            this.posX = 1024 - 975
+        } else if (this.posX > 1000) {
+            this.posX = 15
         }
     }
     move(ctx) {
@@ -33,7 +33,7 @@ export class Character {
         this.posX += this.velX
         
         this.posY += this.velY
-        if (this.posY >= 376) { // ensures characters stay within screen
+        if (this.posY >= 430) { // ensures characters stay within screen
             this.velY = 0 // will mimic gravity acceleration
         } else {
             this.velY += GRAVITY

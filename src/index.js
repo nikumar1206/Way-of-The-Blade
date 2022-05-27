@@ -74,24 +74,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         // key inputs for player 1
         if (KEYS.w.pressed) {
-            player1.velY = -14
+            player1.velY = -10
         }
         if (KEYS.a.pressed) {
-            player1.velX = -25
+            player1.velX = -14
         }
         if (KEYS.d.pressed) {
-            player1.velX = 25
+            player1.velX = 14
         }
 
         // key inputs for player 2
         if (KEYS.ArrowUp.pressed) {
-            player2.velY = -14
+            player2.velY = -10
         }
         if (KEYS.ArrowLeft.pressed) {
-            player2.velX = -25
+            player2.velX = -14
         }
         if (KEYS.ArrowRight.pressed) {
-            player2.velX = 25
+            player2.velX = 14
         }
 
     }
