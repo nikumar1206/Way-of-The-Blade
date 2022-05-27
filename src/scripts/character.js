@@ -1,10 +1,11 @@
 const GRAVITY = 2
 export class Character {
-    constructor(posX, posY, velX = 0, velY = 25) {
+    constructor(posX, posY, velX = 0, velY = 0) {
         this.posX = posX
         this.posY = posY
         this.velX = velX
         this.velY = velY
+        this.handleClick()
     } 
 
     draw(ctx) {
@@ -13,8 +14,6 @@ export class Character {
     }
 
     update(ctx) {
-        this.draw(ctx);
-    
         this.posX += this.velX
         this.posY += this.velY
     
@@ -23,15 +22,23 @@ export class Character {
         } else {
             this.velY = 0
         }
+    
+        this.draw(ctx);
     }
 
-    // animate(ctx) {
-    //     setTimeout(() => {
-    //         requestAnimationFrame(this.animate.bind(this, ctx));
-    //     }, 16.66);
-    //     this.update(ctx);
-    //     // console.log("animate isx being called");
-    // }
+    handleClick() {
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "w") {
+                this.posY -= 50;
+            } else if (e.key === "a") {
+                this.posX -= 50
+            } else if (e.key === "d") {
+                this.posX += 50
+            } else if (e.key === "s") {
+                this.velY += 50
+            }
+        })
+    }
 
-    
+
 }

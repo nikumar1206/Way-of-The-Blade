@@ -24,8 +24,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     // player.animate(ctx)
     // enemy.animate(ctx)
-    player.draw(ctx)
-    enemy.draw(ctx)
+
 
 
     const animation = () => {
@@ -38,6 +37,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         setTimeout(animation, 16.66);
     }
     animation();
+
     
 });
 
