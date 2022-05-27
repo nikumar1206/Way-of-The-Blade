@@ -23,11 +23,11 @@ export class Character {
             this.posX = 15
         }
     }
-    move(ctx) {
 
+    move(ctx) {
+    
         if ((this.posX < 50 || this.posX > 950)) {
             this.wrap();
-
         }
 
         this.posX += this.velX
