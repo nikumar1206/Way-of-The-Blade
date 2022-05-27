@@ -13,12 +13,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     ctx.fillStyle = "lightblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    let player = new Character(200, 20)
+    let player = new Character([200, 20], [0,0])
     window.player = player;
     // player.draw(ctx);
     // console.log(player);
 
-    let enemy = new Character(800, 20)
+    let enemy = new Character([800, 20], [0,0])
     // enemy.draw(ctx);
     // console.log(enemy);
 
@@ -35,6 +35,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // player.draw(ctx);
         // enemy.draw(ctx);
         setTimeout(animation, 16.66);
+        console.log(enemy.posX);
     }
     animation();
 
