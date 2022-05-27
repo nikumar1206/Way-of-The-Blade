@@ -7,8 +7,8 @@ export class Character {
     } 
 
     draw(ctx) {
-        ctx.fillStyle = "lightblue";
-        ctx.fillRect(0, 0, 1024, 526);
+        // ctx.fillStyle = "lightblue";
+        // ctx.fillRect(0, 0, 1024, 526);
     
         ctx.fillStyle = "green"
         ctx.fillRect(this.posX, this.posY, 50, 150)
@@ -20,13 +20,13 @@ export class Character {
         this.posY += this.velY
     }
 
-    animate(ctx) {
-        setTimeout(() => {
-            requestAnimationFrame(this.animate.bind(this, ctx));
-        }, 16.66);
-        this.update(ctx);
-        // console.log("animate isx being called");
-    }
+    // animate(ctx) {
+    //     setTimeout(() => {
+    //         requestAnimationFrame(this.animate.bind(this, ctx));
+    //     }, 16.66);
+    //     this.update(ctx);
+    //     // console.log("animate isx being called");
+    // }
 
     
 }

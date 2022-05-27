@@ -1,6 +1,6 @@
 const { Character } = require("./scripts/character");
 
-
+window.Character = Character
 window.addEventListener('DOMContentLoaded', (event) => {
     // console.log('DOM fully loaded and parsed');
 
@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let player = new Character(200, 20)
+    window.player = player;
     // player.draw(ctx);
     // console.log(player);
 
@@ -21,8 +22,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // enemy.draw(ctx);
     // console.log(enemy);
 
-    player.animate(ctx)
-    enemy.animate(ctx)
+    // player.animate(ctx)
+    // enemy.animate(ctx)
+    player.draw(ctx)
+    enemy.draw(ctx)
 
+
+    const animation = () => {
+        ctx.fillStyle = "lightblue";
+        ctx.fillRect(0, 0, 1024, 526);
+        player.update(ctx);
+        enemy.update(ctx);
+        // player.draw(ctx);
+        // enemy.draw(ctx);
+        setTimeout(animation, 16.66);
+    }
+    animation();
+    
 });
 
