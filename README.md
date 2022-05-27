@@ -11,7 +11,7 @@ In this game, the user will be able to:
   * have an epic battle against the tyrant
   * earn the respect of his village!
 ### Wireframe
-[Link to Wireframe](https://i.imgur.com/wg89NsO.png)
+![](/assets/initial_wireframe.png)
 ### Technology and APIs
   This game is built entirely using vanilla DOM manipulation and the HTML Canvas!
 
