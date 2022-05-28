@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     ctx.fillStyle = "lightblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
+
     const KEYS = {
         w: {
             pressed: false
@@ -27,6 +27,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         d: {
           pressed: false
         },
+        e: {
+            pressed: false
+        },
         ArrowUp: {
             pressed: false
         },
@@ -35,17 +38,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
         },
         ArrowLeft: {
           pressed: false
+        },
+        Shift: {
+            pressed: false
         }
       }
 
-      let player1 = new Character([100, 430], [0,0]) 
-      let player2 = new Character([900, 430], [0,0])
+      let player1 = new Character([100, 430], [0,0], "player1") 
+      let player2 = new Character([900, 430], [0,0], "player2")
 
       window.addEventListener("keydown", (e) => {
+        //   console.log(e);
           let char = e.key
           if (char in KEYS) {
             KEYS[char].pressed = true
-          } 
+          }
     });
 
     window.addEventListener("keyup", (e) => {
@@ -61,11 +68,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
             player1.velX = 0
         }
 
-        // stop
+        // stop char movement
         if (char === "ArrowLeft") {
             player2.velX = 0
         } else if (char === "ArrowRight") {
             player2.velX = 0
+        }
+
+        // allow fight
+        if (char === "e") {
+            player1.attack(player2)
+        }
+        if (char === "Shift") {
+            player2.attack(player1)
         }
     })
 
@@ -73,14 +88,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
         window.requestAnimationFrame(animate)
     
         ctx.fillStyle = "lightblue";
-        ctx.fillRect(0, 0, 1024, 526); //re-renders background
+        ctx.fillRect(0, 0, canvas.width, canvas.height); //re-renders background
 
         player1.move(ctx);
         player2.move(ctx); //allows movement for players
 
         // key inputs for player 1
         if (KEYS.w.pressed && player1.posY >=430) {
-            player1.velY = -14
+            player1.velY = -15
         }
         if (KEYS.a.pressed) {
             player1.velX = -10
@@ -91,7 +106,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         // key inputs for player 2
         if (KEYS.ArrowUp.pressed  && player2.posY >=430) {
-            player2.velY = -14
+            player2.velY = -15
         }
         if (KEYS.ArrowLeft.pressed) {
             player2.velX = -10
@@ -99,8 +114,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if (KEYS.ArrowRight.pressed) {
             player2.velX = 10
         }
-
-        console.log(player1.collisionWith(player2))
+        console.log(player2.health);
     }
     animate();
 });

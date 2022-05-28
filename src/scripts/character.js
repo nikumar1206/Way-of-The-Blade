@@ -9,11 +9,11 @@ export class Character {
         this.velX = vel[0] // sets up velocity for characters
         this.velY = vel[1]
 
-        this.width = 25
-        this.height = 100 //character size
-    
-        this.hitBox;
 
+        this.width = 25
+        this.height = 100 // character size
+    
+        // this.type = type
         // game collision/hit logic
         this.attackRange = { // how far the player's attack range extends
             posX: this.posX,
@@ -21,6 +21,8 @@ export class Character {
             width: 50,
             height: 75,
         }
+        this.health = 100
+        this.attacking = true;
     }
 
     draw(ctx) {
@@ -80,4 +82,30 @@ export class Character {
     collisionWith(character2) {
         return (this.xAxisCollisionWith(character2) && this.yAxisCollisionWith(character2))
     }
+
+
+    attack(character2) {
+        if (this.collisionWith(character2) && this.attacking) {
+            this.completeHit(character2)
+            this.attacking = false
+        }
+        // setTimeout(() => {
+        //     if (this.collisionWith(character2) && this.attacking) {
+        //         this.completeHit(character2)
+        //     }
+        //     this.attacking = false 
+        // }, 200)
+        setTimeout(() => {
+            this.attacking = true
+        }, 500);
+    }
+
+    // oppositePlayer() {
+    //     return this.type === "player1" ? "player2" : "player1"
+    // }
+    completeHit(character2) {
+        character2.health -= 20
+    }
+
+
 };
