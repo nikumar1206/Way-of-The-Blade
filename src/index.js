@@ -8,10 +8,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     canvas.width = 1024;
     canvas.height = 526;
     const ctx = canvas.getContext("2d");
+
     ctx.fillStyle = "lightblue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    const KEYS = { //
+    const KEYS = {
         w: {
             pressed: false
         },
@@ -32,8 +33,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
       }
 
-      let player1 = new Character([100, 200], [0,0], "player1") 
-      let player2 = new Character([900, 200], [0,0], "player2")
+      let player1 = new Character([100, 430], [0,0]) 
+      let player2 = new Character([900, 430], [0,0])
 
       window.addEventListener("keydown", (e) => {
           let char = e.key
@@ -49,16 +50,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
             KEYS[char].pressed = false
         }
     
-        if (e.key === "a") {
+        if (char === "a") {
             player1.velX = 0
-        } else if (e.key === "d") {
+        } else if (char === "d") {
             player1.velX = 0
         }
 
         // stop
-        if (e.key === "ArrowLeft") {
+        if (char === "ArrowLeft") {
             player2.velX = 0
-        } else if (e.key === "ArrowRight") {
+        } else if (char === "ArrowRight") {
             player2.velX = 0
         }
     })
@@ -73,27 +74,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
         player2.move(ctx); //allows movement for players
 
         // key inputs for player 1
-        if (KEYS.w.pressed) {
-            player1.velY = -10
+        if (KEYS.w.pressed && player1.posY >=430) {
+            player1.velY = -14
         }
         if (KEYS.a.pressed) {
-            player1.velX = -14
+            player1.velX = -10
         }
         if (KEYS.d.pressed) {
-            player1.velX = 14
+            player1.velX = 10
         }
 
         // key inputs for player 2
-        if (KEYS.ArrowUp.pressed) {
-            player2.velY = -10
+        if (KEYS.ArrowUp.pressed  && player2.posY >=430) {
+            player2.velY = -14
         }
         if (KEYS.ArrowLeft.pressed) {
-            player2.velX = -14
+            player2.velX = -10
         }
         if (KEYS.ArrowRight.pressed) {
-            player2.velX = 14
+            player2.velX = 10
         }
 
+        console.log(player1.collisionWith(player2))
     }
     animate();
 });
