@@ -1,6 +1,6 @@
 const GRAVITY = 0.75
 
-export class Character {
+export class Player {
     constructor(pos, vel, type) {
 
         this.posX = pos[0] // sets up position for characters
