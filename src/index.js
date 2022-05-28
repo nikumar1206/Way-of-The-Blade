@@ -3,6 +3,11 @@ const { Character } = require("./scripts/character");
 // window.Character = Character
 window.addEventListener('DOMContentLoaded', (event) => {
 
+    const audio = document.getElementById("music")
+    // setTimeout(function() {
+    //     audio.play();        // play it through JavaScript after 3 seconds
+    // }, 3000);
+
     // following code will setup a canvas with a blue background
     const canvas = document.getElementById("canvasEl");
     canvas.width = 1024;

@@ -3,7 +3,6 @@ const GRAVITY = 0.75
 export class Character {
     constructor(pos, vel, type) {
 
-        console.log(this.dimX);
         this.posX = pos[0] // sets up position for characters
         this.posY = pos[1]
 
