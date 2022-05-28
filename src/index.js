@@ -114,7 +114,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if (KEYS.ArrowRight.pressed) {
             player2.velX = 10
         }
-        console.log(player2.health);
+        console.log(player1.health);
     }
     animate();
 });

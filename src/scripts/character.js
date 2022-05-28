@@ -97,7 +97,7 @@ export class Character {
         // }, 200)
         setTimeout(() => {
             this.attacking = true
-        }, 500);
+        }, 300);
     }
 
     // oppositePlayer() {
