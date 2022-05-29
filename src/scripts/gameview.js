@@ -9,7 +9,6 @@ export class GameView {
 
     start() {
         this.game.bindEventListeners()
-        // this.game.update(this.ctx);
         this.game.animate(this.ctx);
     }
 }

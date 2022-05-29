@@ -1,6 +1,14 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=VT323&display=swap);
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
+  \*****************************************************************************************************************************************/
+@font-face {
+  font-family: "VT323", Regular;
+  src: url("/assets/VT323/VT323-Regular.ttf");
+}
 canvas, img {
   width: 1024px;
   height: 576px;
@@ -10,4 +18,24 @@ canvas, img {
 
 canvas {
   margin-top: -576px;
+}
+
+#end-screen {
+  display: none;
+}
+
+div {
+  align-content: center;
+  z-index: 1;
+  width: 1024px;
+  height: 576px;
+  position: absolute;
+}
+
+* {
+  font-family: "VT323", monospace;
+}
+
+body {
+  font-family: "VT323", monospace;
 }

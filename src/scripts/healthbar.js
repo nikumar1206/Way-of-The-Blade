@@ -1,4 +1,3 @@
-import { Game } from "./game";
 
 export class HealthBar {
     constructor(pos, player, color) {

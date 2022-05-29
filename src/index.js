@@ -12,8 +12,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // ctx.fillStyle = "lightblue";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const game = new Game();
-    new GameView(ctx, game).start();
+    const playButton = document.getElementById("play")
+    // console.log(playButton);
+    playButton.onclick = () => {
+        // console.log("bloop");
+        const game = new Game();
+        new GameView(ctx, game).start();
+    }
 });
 
 // Code that has beeen completely scrapped for now!

@@ -125,6 +125,11 @@ export class Game {
         if (KEYS.ArrowRight.pressed) {
             this.gamePlayer2.velX = 10
         }
+
+        this.decrementTimer
+        console.log(this.isGameOver());
+
+        this.gameOver()
     }
 
     isGameOver() {
@@ -132,8 +137,10 @@ export class Game {
     }
 
     gameOver() {
-        if (this.isGameOver) {
-            // game over code here
+
+        if (this.isGameOver()) {
+            let end_screen = document.getElementById("end-screen")
+            end_screen.style.display = "block"
         }
     }
 
@@ -153,6 +160,5 @@ export class Game {
             this.timer -= 1
         }, 1000);
     }
-
 
 }
