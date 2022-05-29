@@ -1,7 +1,7 @@
 const GRAVITY = 0.75
 
 export class Player {
-    constructor(pos, vel, type) {
+    constructor(pos, vel, facing) {
 
         this.posX = pos[0] // sets up position for characters
         this.posY = pos[1]
@@ -9,11 +9,13 @@ export class Player {
         this.velX = vel[0] // sets up velocity for characters
         this.velY = vel[1]
 
+        this.facing = facing
 
+        // this.type = type 
         this.width = 25
         this.height = 100 // character size
     
-        // this.type = type
+
         // game collision/hit logic
         this.attackRange = { // how far the player's attack range extends
             posX: this.posX,
@@ -23,14 +25,22 @@ export class Player {
         }
         this.health = 100
         this.attacking = true;
+        // this.movingRight
     }
 
+    shiftattackRange() {
+        if (this.facing === "left") {
+            this.attackRange.posX = this.posX - 50
+        } 
+    }
     draw(ctx) {
     
         ctx.fillStyle = "green";
         ctx.fillRect(this.posX, this.posY, this.width, this.height);
 
         ctx.fillStyle = "red";
+
+        this.shiftattackRange()
         ctx.fillRect(
             this.attackRange.posX,
             this.attackRange.posY,
@@ -47,7 +57,7 @@ export class Player {
         }
     }
 
-    move(ctx) {
+    update(ctx) {
     
         if ((this.posX < 50 || this.posX > 950)) {
             this.wrap();
@@ -71,7 +81,7 @@ export class Player {
     // collision checkers for both x and y direction. get combined to check for collision in game
     xAxisCollisionWith(character2) {
         return ((this.attackRange.posX + this.attackRange.width >= character2.posX) && (
-            this.attackRange.posX <= character2.posX + character2.height))
+            this.attackRange.posX <= character2.posX + character2.width))
     }
 
     yAxisCollisionWith(character2) {
