@@ -8,7 +8,22 @@ export class GameView {
     }
 
     start() {
+        this.cleanupStart();
         this.game.bindEventListeners()
         this.game.animate(this.ctx);
+    }
+
+    cleanupStart() {
+        let startDiv = document.getElementById("splash-instructions")
+        startDiv.style.display = "none"
+    }
+
+    cleanupEnd() {
+        let endDiv = document.getElementById("end-screen")
+        endDiv.style.display = "none"
+    }
+
+    restart() {
+        
     }
 }

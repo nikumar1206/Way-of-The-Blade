@@ -13,10 +13,15 @@ window.addEventListener('DOMContentLoaded', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const playButton = document.getElementById("play")
-    // console.log(playButton);
     playButton.onclick = () => {
-        // console.log("bloop");
-        const game = new Game();
+        let game = new Game();
+        new GameView(ctx, game).start();
+    }
+
+    const replayButton = document.getElementById("playAgain")
+    replayButton.onclick = () => {
+        console.log("bloops");
+        let game = new Game();
         new GameView(ctx, game).start();
     }
 });

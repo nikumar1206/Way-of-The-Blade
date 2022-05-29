@@ -34,7 +34,8 @@ export class Game {
         this.gamePlayer2 = new Player([900, 430], [0,0], "left")
         this.healthbar1 = new HealthBar([100,0], this.gamePlayer1, "green" )
         this.healthbar2 = new HealthBar([550,0], this.gamePlayer2, "green" )
-        this.timer = 60
+        this.timer = 60;
+        this.running = true;
         this.bindEventListeners();
     }
 
@@ -93,43 +94,45 @@ export class Game {
     }
 
     animate(ctx) {
-        window.requestAnimationFrame(this.animate.bind(this, ctx))
-    
-        ctx.fillStyle = "lightblue";
-        ctx.clearRect(0, 0, 1024, 576); //re-renders background
-    
-        this.gamePlayer1.update(ctx);
-        this.gamePlayer2.update(ctx); //allows movement for players
+        if (this.running) {
 
-        this.healthbar1.update(ctx);
-        this.healthbar2.update(ctx);
-    
-        // key inputs for player 1
-        if (KEYS.w.pressed && this.gamePlayer1.posY >=430) {
-            this.gamePlayer1.velY = -15
-        }
-        if (KEYS.a.pressed) {
-            this.gamePlayer1.velX = -10
-        }
-        if (KEYS.d.pressed) {
-            this.gamePlayer1.velX = 10
-        }
-    
-        // key inputs for player 2
-        if (KEYS.ArrowUp.pressed  && this.gamePlayer2.posY >=430) {
-            this.gamePlayer2.velY = -15
-        }
-        if (KEYS.ArrowLeft.pressed) {
-            this.gamePlayer2.velX = -10
-        }
-        if (KEYS.ArrowRight.pressed) {
-            this.gamePlayer2.velX = 10
+            window.requestAnimationFrame(this.animate.bind(this, ctx))
+        
+            ctx.fillStyle = "lightblue";
+            ctx.clearRect(0, 0, 1024, 576); //re-renders background
+        
+            this.gamePlayer1.update(ctx);
+            this.gamePlayer2.update(ctx); //allows movement for players
+
+            this.healthbar1.update(ctx);
+            this.healthbar2.update(ctx);
+        
+            // key inputs for player 1
+            if (KEYS.w.pressed && this.gamePlayer1.posY >=430) {
+                this.gamePlayer1.velY = -15
+            }
+            if (KEYS.a.pressed) {
+                this.gamePlayer1.velX = -10
+            }
+            if (KEYS.d.pressed) {
+                this.gamePlayer1.velX = 10
+            }
+        
+            // key inputs for player 2
+            if (KEYS.ArrowUp.pressed  && this.gamePlayer2.posY >=430) {
+                this.gamePlayer2.velY = -15
+            }
+            if (KEYS.ArrowLeft.pressed) {
+                this.gamePlayer2.velX = -10
+            }
+            if (KEYS.ArrowRight.pressed) {
+                this.gamePlayer2.velX = 10
+            }
+
+            console.log(this.timer);
+            this.gameOver()
         }
 
-        this.decrementTimer
-        console.log(this.isGameOver());
-
-        this.gameOver()
     }
 
     isGameOver() {
@@ -137,10 +140,11 @@ export class Game {
     }
 
     gameOver() {
-
         if (this.isGameOver()) {
+            this.running = false
             let end_screen = document.getElementById("end-screen")
             end_screen.style.display = "block"
+
         }
     }
 
@@ -152,8 +156,8 @@ export class Game {
         return this.gamePlayer1.health > 0 ? this.gamePlayer1 : this.gamePlayer2
     }
 
-    isGameRunning() { // dont know if needed
-    }
+    // isGameRunning() { // dont know if needed
+    // }
 
     decrementTimer() {
         setInterval(() => {

@@ -13,7 +13,7 @@ canvas, img {
   width: 1024px;
   height: 576px;
   position: relative;
-  display: block;
+  display: flex;
 }
 
 canvas {
@@ -24,18 +24,22 @@ canvas {
   display: none;
 }
 
-div {
+#timer {
   align-content: center;
-  z-index: 1;
   width: 1024px;
   height: 576px;
   position: absolute;
 }
 
-* {
-  font-family: "VT323", monospace;
+#splash-instructions {
+  z-index: 2;
 }
 
-body {
+#end-screen {
+  z-index: 10;
+  position: absolute;
+}
+
+html, body, button {
   font-family: "VT323", monospace;
 }

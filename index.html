@@ -10,20 +10,32 @@
 </head>
 <body>
 
-    <div id="splash-instructions">
-        <h1>Way of the Blade</h1>
-        <button type="button" id="play">PlayMe!</button>
-    </div>
+    <div id="game-container">
+    
+        <img
+        id = "background_img"
+        src="https://i.pinimg.com/originals/80/f9/d4/80f9d4af066c7c4245b80ffd41975f29.gif" 
+        width="1024" height="576">
+    
+        <canvas id="canvasEl"></canvas>
+        <div id="splash-instructions">
+            <h1>Way of the Blade</h1>
+            <button type="button" id="play">PlayMe!</button>
+        </div>
+        
 
-    <div id="end-screen">
-        <h1>Game Over. You win!
-            Would you like to play again?
-            <button type="button" id="playAgain">Restart</button>
-        </h1>
-    </div>
+        <div id="timer">
+            10
+        </div>
 
-    <img src="https://i.pinimg.com/originals/80/f9/d4/80f9d4af066c7c4245b80ffd41975f29.gif" width="1024" height="576" >
-    <canvas id="canvasEl"></canvas>
+        <div id="end-screen">
+            <h1>Game Over. You win!
+                Would you like to play again?
+                <button type="button" id="playAgain">Restart</button>
+            </h1>
+        </div>
+
+    </div>
     <audio id = "music" src="/assets/audio/genkai.mp3" preload="auto"></audio>
 </body>
 </html>

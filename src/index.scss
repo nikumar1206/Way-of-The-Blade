@@ -9,7 +9,7 @@ canvas, img {
     width: 1024px;
     height: 576px;
     position: relative;
-    display: block;
+    display: flex;
 }
 
 canvas {
@@ -20,21 +20,40 @@ canvas {
     display: none;
 }
 
-div {
+#timer {
     align-content: center;
-    z-index: 1;
     width: 1024px;
     height: 576px;
     position: absolute
 }
 
+#splash-instructions {
+    z-index: 2;
+    // position: inherit;
+}
+
+#end-screen {
+    z-index: 10;
+    position: absolute;
+}
+
 $game-font: 'VT323', monospace;
 
-* {
+html, body, button {
     font-family: $game-font;
 }
 
 
-body {
-    font-family: $game-font;
-}
+// #background_img {
+//     position: relative;
+//     display: block;
+
+// }
+
+// #timer {
+//     background-color: black;
+//     width: 100px;
+//     height: 50px;
+//     display: flex;
+//     justify-self: center;
+// }
