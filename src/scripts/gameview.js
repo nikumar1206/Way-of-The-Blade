@@ -24,6 +24,6 @@ export class GameView {
     }
 
     restart() {
-        
+        this.cleanupEnd();
     }
 }
