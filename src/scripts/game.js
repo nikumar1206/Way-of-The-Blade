@@ -35,6 +35,7 @@ export class Game {
         this.healthbar1 = new HealthBar([100,0], this.gamePlayer1, "green" )
         this.healthbar2 = new HealthBar([550,0], this.gamePlayer2, "green" )
         this.timer = 60;
+        this.decrementTimer();
         this.running = true;
         this.bindEventListeners();
     }
@@ -63,6 +64,7 @@ export class Game {
                 this.gamePlayer2.facing = "right"
             }
         });
+    
         window.addEventListener("keyup", (e) => {
             let char = e.key
 
@@ -129,7 +131,6 @@ export class Game {
                 this.gamePlayer2.velX = 10
             }
 
-            console.log(this.timer);
             this.gameOver()
         }
 

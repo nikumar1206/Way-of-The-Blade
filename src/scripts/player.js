@@ -1,6 +1,9 @@
+
+import { Sprite } from './sprite';
 const GRAVITY = 0.75
 
-export class Player {
+export class Player extends Sprite {
+
     constructor(pos, vel, facing) {
 
         this.posX = pos[0] // sets up position for characters
@@ -10,11 +13,10 @@ export class Player {
         this.velY = vel[1]
 
         this.facing = facing
-
         // this.type = type 
         this.width = 25
         this.height = 100 // character size
-    
+
 
         // game collision/hit logic
         this.attackRange = { // how far the player's attack range extends
@@ -24,6 +26,7 @@ export class Player {
             height: 75,
         }
         this.health = 100
+        this.changePHB = 0
         this.attacking = true;
         // this.movingRight
     }
@@ -114,7 +117,8 @@ export class Player {
     //     return this.type === "player1" ? "player2" : "player1"
     // }
     completeHit(character2) {
-        character2.health -= 20
+        // character2.health -= 20
+        character2.changePHB = 20
     }
 
 

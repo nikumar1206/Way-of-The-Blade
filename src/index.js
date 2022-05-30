@@ -1,5 +1,6 @@
 import { Game } from './scripts/game';
 import { GameView } from './scripts/gameview';
+import { Sprite } from './scripts/sprite';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -9,7 +10,6 @@ window.addEventListener('DOMContentLoaded', () => {
     canvas.height = 526;
     const ctx = canvas.getContext("2d");
 
-    // ctx.fillStyle = "lightblue";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const playButton = document.getElementById("play")
@@ -24,7 +24,10 @@ window.addEventListener('DOMContentLoaded', () => {
         let game = new Game();
         new GameView(ctx, game).start();
     }
+
 });
+
+
 
 // Code that has beeen completely scrapped for now!
 //

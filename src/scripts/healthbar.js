@@ -14,6 +14,10 @@ export class HealthBar {
     }
 
     update(ctx) {
+        if (this.player.changePHB) {
+            this.player.health -= 1
+            this.player.changePHB -= 1
+        }
         let healthBarwidth = (this.player.health/100) * this.maxWidth
         ctx.lineWidth = 10; // border isnt working
         ctx.strokeStyle = "yellow"
