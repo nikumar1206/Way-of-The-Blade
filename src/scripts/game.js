@@ -35,8 +35,8 @@ export class Game {
         this.healthbar1 = new HealthBar([100,0], this.gamePlayer1, "green" )
         this.healthbar2 = new HealthBar([550,0], this.gamePlayer2, "green" )
         this.timer = 60;
-        this.decrementTimer();
         this.running = true;
+        this.decrementTimer();
         this.bindEventListeners();
     }
 
@@ -95,6 +95,30 @@ export class Game {
         })
     }
 
+    playerMovement() {
+        // key inputs for player 1
+        if (KEYS.w.pressed && this.gamePlayer1.posY >=430) {
+            this.gamePlayer1.velY = -15
+        }
+        if (KEYS.a.pressed) {
+            this.gamePlayer1.velX = -10
+        }
+        if (KEYS.d.pressed) {
+            this.gamePlayer1.velX = 10
+        }
+
+        // key inputs for player 2
+        if (KEYS.ArrowUp.pressed  && this.gamePlayer2.posY >=430) {
+            this.gamePlayer2.velY = -15
+        }
+        if (KEYS.ArrowLeft.pressed) {
+            this.gamePlayer2.velX = -10
+        }
+        if (KEYS.ArrowRight.pressed) {
+            this.gamePlayer2.velX = 10
+        }
+    }
+
     animate(ctx) {
         if (this.running) {
 
@@ -108,29 +132,9 @@ export class Game {
 
             this.healthbar1.update(ctx);
             this.healthbar2.update(ctx);
-        
-            // key inputs for player 1
-            if (KEYS.w.pressed && this.gamePlayer1.posY >=430) {
-                this.gamePlayer1.velY = -15
-            }
-            if (KEYS.a.pressed) {
-                this.gamePlayer1.velX = -10
-            }
-            if (KEYS.d.pressed) {
-                this.gamePlayer1.velX = 10
-            }
-        
-            // key inputs for player 2
-            if (KEYS.ArrowUp.pressed  && this.gamePlayer2.posY >=430) {
-                this.gamePlayer2.velY = -15
-            }
-            if (KEYS.ArrowLeft.pressed) {
-                this.gamePlayer2.velX = -10
-            }
-            if (KEYS.ArrowRight.pressed) {
-                this.gamePlayer2.velX = 10
-            }
 
+            this.playerMovement();
+    
             this.gameOver()
         }
 

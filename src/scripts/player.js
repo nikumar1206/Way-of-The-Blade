@@ -4,7 +4,9 @@ const GRAVITY = 0.75
 
 export class Player extends Sprite {
 
-    constructor(pos, vel, facing) {
+    constructor(pos, vel, facing, imageSrc, scale, maxFrames, sprites) {
+
+        super(pos, imageSrc, scale, maxFrames); // required!
 
         this.posX = pos[0] // sets up position for characters
         this.posY = pos[1]
@@ -13,6 +15,7 @@ export class Player extends Sprite {
         this.velY = vel[1]
 
         this.facing = facing
+        this.sprites = sprites
         // this.type = type 
         this.width = 25
         this.height = 100 // character size
