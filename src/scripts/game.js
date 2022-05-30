@@ -30,10 +30,26 @@ const KEYS = {
 
 export class Game {
     constructor() {
-        this.gamePlayer1 = new Player([100, 430], [0,0], "right") 
-        this.gamePlayer2 = new Player([900, 430], [0,0], "left")
-        this.healthbar1 = new HealthBar([100,0], this.gamePlayer1, "green" )
-        this.healthbar2 = new HealthBar([550,0], this.gamePlayer2, "green" )
+        this.gamePlayer1 = new Player(
+            [100, 430], 
+            [0,0], 
+            "right",
+            './assets/martial_hero/Sprites/Idle.png',
+            1,
+            8,
+            "hello")
+
+        this.gamePlayer2 = new Player(
+            [900, 430], 
+            [0,0], 
+            "left",
+            './assets/martial_hero/Sprites/Idle.png',
+            1,
+            8,
+            "hello")
+        window.gamePlayer1 = this.gamePlayer1
+        this.healthbar1 = new HealthBar([100,0], this.gamePlayer1, "#71BC68" )
+        this.healthbar2 = new HealthBar([550,0], this.gamePlayer2, "#71BC68" )
         this.timer = 60;
         this.running = true;
         this.decrementTimer();

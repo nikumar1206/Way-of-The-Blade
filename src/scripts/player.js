@@ -4,9 +4,9 @@ const GRAVITY = 0.75
 
 export class Player extends Sprite {
 
-    constructor(pos, vel, facing, imageSrc, scale, maxFrames, sprites) {
+    constructor(pos, vel, facing, imageSrc, scale, totalSpriteFrames, sprites) {
 
-        super(pos, imageSrc, scale, maxFrames); // required!
+        super(pos, imageSrc, 25, 100, scale, totalSpriteFrames); // required!
 
         this.posX = pos[0] // sets up position for characters
         this.posY = pos[1]
@@ -39,21 +39,21 @@ export class Player extends Sprite {
             this.attackRange.posX = this.posX - 50
         } 
     }
-    draw(ctx) {
+    // draw(ctx) {
     
-        ctx.fillStyle = "green";
-        ctx.fillRect(this.posX, this.posY, this.width, this.height);
+    //     ctx.fillStyle = "green";
+    //     ctx.fillRect(this.posX, this.posY, this.width, this.height);
 
-        ctx.fillStyle = "red";
+    //     ctx.fillStyle = "red";
 
-        this.shiftattackRange()
-        ctx.fillRect(
-            this.attackRange.posX,
-            this.attackRange.posY,
-            this.attackRange.width,
-            this.attackRange.height,
-        );
-    }
+    //     this.shiftattackRange()
+    //     ctx.fillRect(
+    //         this.attackRange.posX,
+    //         this.attackRange.posY,
+    //         this.attackRange.width,
+    //         this.attackRange.height,
+    //     );
+    // }
 
     wrap() {
         if (this.posX < 25) {
@@ -63,26 +63,27 @@ export class Player extends Sprite {
         }
     }
 
-    update(ctx) {
-    
-        if ((this.posX < 50 || this.posX > 950)) {
-            this.wrap();
-        }
+    // update(ctx) {
 
-        this.posX += this.velX
+
+    //     if ((this.posX < 50 || this.posX > 950)) {
+    //         this.wrap();
+    //     }
+
+    //     this.posX += this.velX
         
-        this.posY += this.velY
-        if (this.posY >= 430) { // ensures characters cannot sink into canvas!
-            this.velY = 0
-        } else {
-            this.velY += GRAVITY //// mimics gravity's acceleration
-        }
+    //     this.posY += this.velY
+    //     if (this.posY >= 430) { // ensures characters cannot sink into canvas!
+    //         this.velY = 0
+    //     } else {
+    //         this.velY += GRAVITY //// mimics gravity's acceleration
+    //     }
 
-        this.attackRange.posX = this.posX + this.width // creates a attack range in front of character
-        this.attackRange.posY = this.posY
+    //     this.attackRange.posX = this.posX + this.width // creates a attack range in front of character
+    //     this.attackRange.posY = this.posY
 
-        this.draw(ctx);
-    }
+    //     this.draw(ctx);
+    // }
 
     // collision checkers for both x and y direction. get combined to check for collision in game
     xAxisCollisionWith(character2) {
@@ -121,7 +122,7 @@ export class Player extends Sprite {
     // }
     completeHit(character2) {
         // character2.health -= 20
-        character2.changePHB = 20
+        character2.changePHB = 15
     }
 
 

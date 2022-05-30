@@ -20,7 +20,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const replayButton = document.getElementById("playAgain")
     replayButton.onclick = () => {
-        console.log("bloops");
         let game = new Game();
         new GameView(ctx, game).start();
     }

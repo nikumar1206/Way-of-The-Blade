@@ -10,7 +10,7 @@ export class HealthBar {
 
     }
     colorChange() {
-        return this.player.health < 25 ? this.color = "red" : this.color
+        return this.player.health < 25 ? this.color = "#B22B27" : this.color
     }
 
     update(ctx) {
@@ -19,9 +19,7 @@ export class HealthBar {
             this.player.changePHB -= 1
         }
         let healthBarwidth = (this.player.health/100) * this.maxWidth
-        ctx.lineWidth = 10; // border isnt working
-        ctx.strokeStyle = "yellow"
         ctx.fillStyle = this.colorChange()
-        ctx.fillRect(this.posX, this.posY, healthBarwidth, this.maxHeight)
+        ctx.fillRect(this.posX, this.posY, healthBarwidth, this.maxHeight, 5)
     }
 }
