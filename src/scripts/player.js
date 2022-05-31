@@ -26,6 +26,8 @@ export class Player extends Sprite {
     this.width = 50;
     this.height = 100; // character size
 
+    this.dead = false;
+
     // game collision/hit logic
     this.attackRange = {
       // how far the player's attack range extends
@@ -76,9 +78,9 @@ export class Player extends Sprite {
   }
 
   wrap() {
-    if (this.posX < 25) {
+    if (this.posX < 10) {
       this.posX = 1280 - 25;
-    } else if (this.posX - 25 > 1250) {
+    } else if (this.posX > 1255) {
       this.posX = 15;
     }
   }
@@ -131,7 +133,6 @@ export class Player extends Sprite {
     if (this.collisionWith(character2) && this.attacking) {
       this.completeHit(character2);
     }
-
     setTimeout(() => {
       this.attacking = false;
     }, 300);
@@ -142,6 +143,6 @@ export class Player extends Sprite {
   // }
   completeHit(character2) {
     // character2.health -= 20
-    character2.changePHB = 15;
+    character2.changePHB = 10;
   }
 }

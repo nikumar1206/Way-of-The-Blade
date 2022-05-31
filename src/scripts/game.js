@@ -78,6 +78,10 @@ export class Game {
           imageSrc: "./assets/martialhero/Sprites/takehitwhiteright.png",
           totalSpriteFrames: 4,
         },
+        death: {
+          imageSrc: "./assets/martialhero/Sprites/deathleft.png",
+          totalSpriteFrames: 6,
+        },
       }
     );
     window.player = this.gamePlayer1;
@@ -123,6 +127,18 @@ export class Game {
           imageSrc: "./assets/martialhero2/Sprites/attack1redleft.png",
           totalSpriteFrames: 4,
         },
+        flinchleft: {
+          imageSrc: "./assets/martialhero2/Sprites/takehitleft.png",
+          totalSpriteFrames: 3,
+        },
+        flinchright: {
+          imageSrc: "./assets/martialhero2/Sprites/takehitright.png",
+          totalSpriteFrames: 3,
+        },
+        death: {
+          imageSrc: "./assets/martialhero2/Sprites/death.png",
+          totalSpriteFrames: 7,
+        },
       }
     );
     // window.gamePlayer1 = this.gamePlayer1;
@@ -140,7 +156,6 @@ export class Game {
   //     // this.healthbar1.update(ctx);
   //     // this.healthbar2.update(ctx);
   // }
-
   bindEventListeners() {
     window.addEventListener("keydown", (e) => {
       let char = e.key;
@@ -192,7 +207,11 @@ export class Game {
 
   player1Movement() {
     // key inputs for player 1
-
+    if (
+      this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
+      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    )
+      return;
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.flinchleft.image &&
       this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
@@ -203,7 +222,6 @@ export class Game {
       this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
     )
       return;
-    console.log(this.gamePlayer1.currFrame);
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.attack1left.image &&
       this.gamePlayer1.currFrame < this.gamePlayer1.totalSpriteFrames - 1
@@ -275,10 +293,21 @@ export class Game {
     }
 
     if (this.gamePlayer1.changePHB > 0) {
-      if (this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image) {
+      if (
+        this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image &&
+        this.gamePlayer1.facing === "left"
+      ) {
         this.gamePlayer1.image = this.gamePlayer1.sprites.flinchleft.image;
         this.gamePlayer1.totalSpriteFrames =
           this.gamePlayer1.sprites.flinchleft.totalSpriteFrames;
+        this.gamePlayer1.currFrame = 0;
+      } else if (
+        this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image &&
+        this.gamePlayer1.facing === "right"
+      ) {
+        this.gamePlayer1.image = this.gamePlayer1.sprites.flinchright.image;
+        this.gamePlayer1.totalSpriteFrames =
+          this.gamePlayer1.sprites.flinchright.totalSpriteFrames;
         this.gamePlayer1.currFrame = 0;
       }
     }
@@ -302,9 +331,30 @@ export class Game {
         this.gamePlayer1.currFrame = 0;
       }
     }
+    if (
+      this.gamePlayer1.health <= 0 &&
+      this.gamePlayer1.image != this.gamePlayer1.sprites.death.image
+    ) {
+      this.gamePlayer1.image = this.gamePlayer1.sprites.death.image;
+      this.gamePlayer1.totalSpriteFrames =
+        this.gamePlayer1.sprites.death.totalSpriteFrames;
+      this.gamePlayer1.currFrame = 0;
+      console.log("cheese");
+    }
+    console.log(this.gamePlayer1.health);
   }
 
   player2Movement() {
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
+      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchright.image &&
+      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.attack1left.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
@@ -378,6 +428,26 @@ export class Game {
       }
     }
 
+    if (this.gamePlayer2.changePHB > 0) {
+      if (
+        this.gamePlayer2.image != this.gamePlayer2.sprites.flinchleft.image &&
+        this.gamePlayer2.facing === "left"
+      ) {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.flinchleft.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.flinchleft.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      } else if (
+        this.gamePlayer2.image != this.gamePlayer2.sprites.flinchleft.image &&
+        this.gamePlayer2.facing === "right"
+      ) {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.flinchright.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.flinchright.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      }
+    }
+
     if (KEYS.Shift.pressed) {
       this.gamePlayer2.attack(this.gamePlayer1);
       if (
@@ -406,6 +476,16 @@ export class Game {
     }
   }
 
+  onDeath(char) {
+    if (
+      char.health === 0 &&
+      char.image != char.gamePlayer1.sprites.death.image
+    ) {
+      char.image = char.gamePlayer1.sprites.death.image;
+      char.totalSpriteFrames = char.sprites.death.totalSpriteFrames;
+      char.currFrame = 0;
+    }
+  }
   animate(ctx) {
     if (this.running) {
       window.requestAnimationFrame(this.animate.bind(this, ctx));
