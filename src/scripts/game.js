@@ -83,13 +83,13 @@ export class Game {
     window.player = this.gamePlayer1;
 
     this.gamePlayer2 = new Player(
-      [1200, 0],
+      [1100, 0],
       [150, 125],
       [0, 0],
       "left",
-      "./assets/martialhero2/Sprites/idleright.png",
+      "./assets/martialhero2/Sprites/idleleft.png",
       1.75,
-      8,
+      4,
       {
         idleRight: {
           imageSrc: "./assets/martialhero2/Sprites/idleright.png",
@@ -318,6 +318,18 @@ export class Game {
     if (
       this.gamePlayer2.velX === 0 &&
       this.gamePlayer2.velY === 0 &&
+      this.gamePlayer2.facing === "left" &&
+      this.gamePlayer2.image != this.gamePlayer2.sprites.idleLeft.image
+    ) {
+      this.gamePlayer2.image = this.gamePlayer2.sprites.idleLeft.image;
+      this.gamePlayer2.totalSpriteFrames =
+        this.gamePlayer2.sprites.idleLeft.totalSpriteFrames;
+      this.gamePlayer2.currFrame = 0;
+    }
+
+    if (
+      this.gamePlayer2.velX === 0 &&
+      this.gamePlayer2.velY === 0 &&
       this.gamePlayer2.facing === "right" &&
       this.gamePlayer2.image != this.gamePlayer2.sprites.idleRight.image
     ) {
@@ -326,17 +338,6 @@ export class Game {
         this.gamePlayer2.sprites.idleRight.totalSpriteFrames;
       this.gamePlayer2.currFrame = 0;
       //   console.log(this.gamePlayer2.image);
-    }
-    if (
-      this.gamePlayer2.velX === 0 &&
-      this.gamePlayer2.velY === 0 &&
-      this.gamePlayer2.facing === "left" &&
-      this.gamePlayer2.image != this.gamePlayer2.sprites.idleLeft.image
-    ) {
-      this.gamePlayer2.image = this.gamePlayer2.sprites.idleLeft.image;
-      this.gamePlayer2.totalSpriteFrames =
-        this.gamePlayer2.sprites.idleLeft.totalSpriteFrames;
-      this.gamePlayer2.currFrame = 0;
     }
 
     if (KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {

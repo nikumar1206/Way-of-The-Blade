@@ -31,7 +31,7 @@ export class Player extends Sprite {
       // how far the player's attack range extends
       posX: this.posX,
       posY: this.posY,
-      width: 150,
+      width: 120,
       height: 120,
     };
 
