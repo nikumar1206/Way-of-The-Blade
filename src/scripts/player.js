@@ -23,7 +23,7 @@ export class Player extends Sprite {
     this.facing = facing;
     this.sprites = sprites;
     // this.type = type
-    this.width = 25;
+    this.width = 50;
     this.height = 100; // character size
 
     // game collision/hit logic
@@ -31,14 +31,14 @@ export class Player extends Sprite {
       // how far the player's attack range extends
       posX: this.posX,
       posY: this.posY,
-      width: 50,
-      height: 75,
+      width: 150,
+      height: 120,
     };
 
     this.health = 100;
     this.changePHB = 0;
     this.attacking = false;
-    this.tto;
+    // this.tto;
     // this.movingRight
 
     for (let sprite in this.sprites) {
@@ -58,24 +58,27 @@ export class Player extends Sprite {
 
   shiftattackRange() {
     if (this.facing === "left") {
-      this.attackRange.posX = this.posX - 50;
+      this.attackRange.posX = this.posX - this.attackRange.width;
+      this.attackRange.posY = this.posY - 50;
     }
   }
 
   draw(ctx) {
     this.shiftattackRange();
-    ctx.fillRect(
-      this.attackRange.posX,
-      this.attackRange.posY,
-      this.attackRange.width,
-      this.attackRange.height
-    );
+    // ctx.fillRect(
+    //   this.attackRange.posX,
+    //   this.attackRange.posY,
+    //   this.attackRange.width,
+    //   this.attackRange.height
+    // );
+    // ctx.fillStyle = "green";
+    // ctx.fillRect(this.posX, this.posY, this.width, this.height);
   }
 
   wrap() {
     if (this.posX < 25) {
-      this.posX = 1024 - 25;
-    } else if (this.posX > 1000) {
+      this.posX = 1280 - 25;
+    } else if (this.posX - 25 > 1250) {
       this.posX = 15;
     }
   }
@@ -88,7 +91,7 @@ export class Player extends Sprite {
     this.posX += this.velX;
 
     this.posY += this.velY;
-    if (this.posY >= 430) {
+    if (this.posY >= 425) {
       // ensures characters cannot sink into canvas!
       this.velY = 0;
     } else {
@@ -96,7 +99,7 @@ export class Player extends Sprite {
     }
 
     this.attackRange.posX = this.posX + this.width; // creates a attack range in front of character
-    this.attackRange.posY = this.posY;
+    this.attackRange.posY = this.posY - 50;
 
     this.draw(ctx);
     this.updateSprite(ctx);
@@ -128,12 +131,7 @@ export class Player extends Sprite {
     if (this.collisionWith(character2) && this.attacking) {
       this.completeHit(character2);
     }
-    // setTimeout(() => {
-    //     if (this.collisionWith(character2) && this.attacking) {
-    //         this.completeHit(character2)
-    //     }
-    //     this.attacking = false
-    // }, 200)
+
     setTimeout(() => {
       this.attacking = false;
     }, 300);

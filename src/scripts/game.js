@@ -30,8 +30,8 @@ const KEYS = {
 export class Game {
   constructor() {
     this.gamePlayer1 = new Player(
-      [100, 430],
-      [200, 200],
+      [100, 0],
+      [150, 125],
       [0, 0],
       "right",
       "./assets/martialhero/Sprites/idleright.png",
@@ -66,13 +66,25 @@ export class Game {
           imageSrc: "./assets/martialhero/Sprites/attack1blueright.png",
           totalSpriteFrames: 6,
         },
+        attack1left: {
+          imageSrc: "./assets/martialhero/Sprites/attack1blueleft.png",
+          totalSpriteFrames: 6,
+        },
+        flinchleft: {
+          imageSrc: "./assets/martialhero/Sprites/takehitwhiteleft.png",
+          totalSpriteFrames: 4,
+        },
+        flinchright: {
+          imageSrc: "./assets/martialhero/Sprites/takehitwhiteright.png",
+          totalSpriteFrames: 4,
+        },
       }
     );
     window.player = this.gamePlayer1;
 
     this.gamePlayer2 = new Player(
-      [900, 430],
-      [200, 200],
+      [1200, 0],
+      [150, 125],
       [0, 0],
       "left",
       "./assets/martialhero2/Sprites/idleright.png",
@@ -180,7 +192,23 @@ export class Game {
 
   player1Movement() {
     // key inputs for player 1
+
+    if (
+      this.gamePlayer1.image === this.gamePlayer1.sprites.flinchleft.image &&
+      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer1.image === this.gamePlayer1.sprites.flinchright.image &&
+      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    )
+      return;
     console.log(this.gamePlayer1.currFrame);
+    if (
+      this.gamePlayer1.image === this.gamePlayer1.sprites.attack1left.image &&
+      this.gamePlayer1.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    )
+      return;
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.attack1right.image &&
       this.gamePlayer1.currFrame < this.gamePlayer1.totalSpriteFrames - 1
@@ -208,7 +236,7 @@ export class Game {
         this.gamePlayer1.sprites.idleLeft.totalSpriteFrames;
     }
 
-    if (KEYS.w.pressed && this.gamePlayer1.posY >= 430) {
+    if (KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
       this.gamePlayer1.velY = -15;
     }
 
@@ -246,31 +274,42 @@ export class Game {
       }
     }
 
+    if (this.gamePlayer1.changePHB > 0) {
+      if (this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image) {
+        this.gamePlayer1.image = this.gamePlayer1.sprites.flinchleft.image;
+        this.gamePlayer1.totalSpriteFrames =
+          this.gamePlayer1.sprites.flinchleft.totalSpriteFrames;
+        this.gamePlayer1.currFrame = 0;
+      }
+    }
     if (KEYS.e.pressed) {
       this.gamePlayer1.attack(this.gamePlayer2);
       if (
+        this.gamePlayer1.facing == "right" &&
         this.gamePlayer1.image != this.gamePlayer1.sprites.attack1right.image
       ) {
         this.gamePlayer1.image = this.gamePlayer1.sprites.attack1right.image;
         this.gamePlayer1.totalSpriteFrames =
           this.gamePlayer1.sprites.attack1right.totalSpriteFrames;
         this.gamePlayer1.currFrame = 0;
+      } else if (
+        this.gamePlayer1.facing == "left" &&
+        this.gamePlayer1.image != this.gamePlayer1.sprites.attack1left.image
+      ) {
+        this.gamePlayer1.image = this.gamePlayer1.sprites.attack1left.image;
+        this.gamePlayer1.totalSpriteFrames =
+          this.gamePlayer1.sprites.attack1left.totalSpriteFrames;
+        this.gamePlayer1.currFrame = 0;
       }
-    }
-
-    // key inputs for player 2
-    if (KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 430) {
-      this.gamePlayer2.velY = -15;
-    }
-    if (KEYS.ArrowLeft.pressed) {
-      this.gamePlayer2.velX = -10;
-    }
-    if (KEYS.ArrowRight.pressed) {
-      this.gamePlayer2.velX = 10;
     }
   }
 
   player2Movement() {
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1left.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
@@ -300,7 +339,7 @@ export class Game {
       this.gamePlayer2.currFrame = 0;
     }
 
-    if (KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 430) {
+    if (KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {
       this.gamePlayer2.velY = -15;
     }
 
@@ -341,13 +380,28 @@ export class Game {
     if (KEYS.Shift.pressed) {
       this.gamePlayer2.attack(this.gamePlayer1);
       if (
-        this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image
+        this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image &&
+        this.gamePlayer2.facing === "right"
       ) {
         this.gamePlayer2.image = this.gamePlayer2.sprites.attack1right.image;
         this.gamePlayer2.totalSpriteFrames =
           this.gamePlayer2.sprites.attack1right.totalSpriteFrames;
         this.gamePlayer2.currFrame = 0;
+      } else if (
+        this.gamePlayer2.image != this.gamePlayer2.sprites.attack1left.image &&
+        this.gamePlayer2.facing === "left"
+      ) {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.attack1left.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.attack1left.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
       }
+    }
+    if (KEYS.ArrowLeft.pressed) {
+      this.gamePlayer2.velX = -10;
+    }
+    if (KEYS.ArrowRight.pressed) {
+      this.gamePlayer2.velX = 10;
     }
   }
 
@@ -355,8 +409,8 @@ export class Game {
     if (this.running) {
       window.requestAnimationFrame(this.animate.bind(this, ctx));
 
-      ctx.fillStyle = "lightblue";
-      ctx.clearRect(0, 0, 1024, 576); //re-renders background
+      //   ctx.fillStyle = "lightblue";
+      ctx.clearRect(0, 0, 1280, 620); //re-renders background
 
       this.gamePlayer1.update(ctx);
       this.gamePlayer2.update(ctx); //allows movement for players
