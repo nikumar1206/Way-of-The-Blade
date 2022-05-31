@@ -9,25 +9,17 @@ window.addEventListener("DOMContentLoaded", () => {
   canvas.height = 620;
   const ctx = canvas.getContext("2d");
 
+  const audio = document.getElementById("music");
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  //   const playButton = document.getElementById("play");
-  //   playButton.onclick = () => {
-  //     let game = new Game();
-  //     new GameView(ctx, game).start();
-  //   };
+  let buttons = document.getElementsByClassName("game-button");
 
-  //   const replayButton = document.getElementById("playAgain");
-  //   replayButton.onclick = () => {
-  //     let game = new Game();
-  //     new GameView(ctx, game).start();
-  //   };
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = () => {
+      audio.play();
+      let game = new Game();
+      new GameView(ctx, game).start();
+    };
+  }
 });
-
-// Code that has beeen completely scrapped for now!
-//
-//
-// const audio = document.getElementById("music")
-// setTimeout(function() {
-//     audio.play();        // play it through JavaScript after 3 seconds
-// }, 3000);

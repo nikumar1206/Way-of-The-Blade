@@ -5,55 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/main.css">
-    <script src="https://kit.fontawesome.com/23650d1b39.js" crossorigin="anonymous"></script>
     <script src="./dist/main.js"></script>
     <title>Way of the Blade</title>
 </head>
 <body>
 
     <h1>Way of the Blade</h1>
-    <div id="game-container">
-    
-        <img
-        id = "background_img"
-        src="assets/lightwavejapan.gif" 
-        width="1280" height="620">
-    
-        <canvas id="canvasEl"></canvas>
-        <!-- <div id="splash-instructions">
-            <h1>Way of the Blade</h1>
-            <button type="button" id="play">PlayMe!</button>
-        </div> -->
-        
-<!-- 
-        <div id="timer">
-            10
-        </div> -->
+    <div id="body-container">
+        <img id = "background_img" src="assets/lightwavejapan.gif" width="1280" height="620">
 
-        <div id="end-screen">
-            <h1>Game Over. You win!
-                Would you like to play again?
-                <button type="button" id="playAgain">Restart</button>
-            </h1>
+        <div id="game-container">
+
+            <div class= "splash" id="splash-instructions">
+                <p>Welcome to Way of the Blade, a game inspired by Japanese animation!</p>
+                <p>Use the WAD keys to control the hero and E to attack</p>
+                <p>Beat the enemy boss before the timer runs out!</p>
+                <button class="game-button" type="button" id="play">Play!</button>
+            </div>
+
+            <canvas id="canvasEl"></canvas>
+
+            <!-- <div id="timer">
+                10
+            </div> -->
+
+            <div class = "splash" id="end-screen">
+                <p>Game Over. You win!</p>
+                <p> Would you like to play again?</p>
+                <button type="button" class="game-button" id="playAgain">Restart!</button>
+                </p>
+            </div>
         </div>
-
-    </div>
-
-    <nav id = "navbar">
-        <ul>
-            <li>
-                <a href="https://github.com/nikumar1206">GitHub</a>
-            </li>
-        
-            <li><a href="https://www.linkedin.com/in/nikhil-kumar7890">LinkedIn</a>
-            </li>
-        
-            <li><a href="http://nikumar1206.github.io/personal-website/">My Website</a>
-            </li>
-        
-        </ul>
-    </nav>
-
+        <nav id = "navbar">
+            <ul>
+                <li>
+                    <a href="https://github.com/nikumar1206">GitHub</a>
+                </li>
+            
+                <li><a href="https://www.linkedin.com/in/nikhil-kumar7890">LinkedIn</a>
+                </li>
+            
+                <li><a href="http://nikumar1206.github.io/personal-website/">My Website</a>
+                </li>
+            
+            </ul>
+        </nav>
+</div>
     <audio id = "music" src="/assets/audio/genkai.mp3" preload="auto"></audio>
 </body>
 

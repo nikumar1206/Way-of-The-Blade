@@ -1,0 +1,27 @@
+#navbar {
+    position: absolute;
+    bottom: 0vh;
+    right: 10vh;
+}
+
+#navbar ul {
+    list-style: none;
+}
+
+li {
+    margin: 5px;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: pink;
+}
+
+footer {
+    position: absolute;
+    bottom: 0vh;
+    left: 10vh;
+}

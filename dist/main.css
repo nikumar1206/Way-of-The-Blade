@@ -354,6 +354,37 @@
   [hidden] {
     display: none;
   }
+/*!**************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/nav.css ***!
+  \**************************************************************************************************/
+#navbar {
+    position: absolute;
+    bottom: 0vh;
+    right: 10vh;
+}
+
+#navbar ul {
+    list-style: none;
+}
+
+li {
+    margin: 5px;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: pink;
+}
+
+footer {
+    position: absolute;
+    bottom: 0vh;
+    left: 10vh;
+}
+
 /*!*****************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
   \*****************************************************************************************************************************************/
@@ -371,12 +402,30 @@ canvas, img {
   border: 2px solid black;
 }
 
-img {
+body-container {
   z-index: 1;
 }
 
 canvas {
   z-index: 2;
+}
+
+.splash {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+
+#splash-instructions {
+  z-index: 3;
+}
+
+#end-screen {
+  z-index: 4;
+  display: none;
 }
 
 h1 {
@@ -386,47 +435,21 @@ h1 {
   justify-content: center;
 }
 
-#navbar {
-  position: absolute;
-  bottom: 0vh;
-  right: 10vh;
+button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
 }
 
-#navbar ul {
-  list-style: none;
-}
-
-li {
-  margin: 5px;
-}
-
-a {
-  color: black;
-}
-
-footer {
-  position: absolute;
-  bottom: 0vh;
-  left: 10vh;
-}
-
-#end-screen {
-  display: none;
+button:hover {
+  background-color: pink;
+  transform: scale(1.5);
 }
 
 #timer {
   align-content: center;
   width: 1024px;
   height: 576px;
-  position: absolute;
-}
-
-#splash-instructions {
-  z-index: 2;
-}
-
-#end-screen {
-  z-index: 10;
   position: absolute;
 }
 

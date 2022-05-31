@@ -1,6 +1,6 @@
 @import url(./styles/normalize.css);
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
+@import url(./styles/nav.css);
 
 @font-face {
     font-family: 'VT323', Regular;
@@ -17,49 +17,56 @@ canvas, img {
     border: 2px solid black;
 }
 
-img {
+body-container {
     z-index: 1;
 }
 canvas {
     z-index: 2;
 }
 
+// splash {
+    
+// }
+.splash {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+#splash-instructions {
+    z-index: 3;
+}
+
+#end-screen {
+    z-index: 4;
+    display: none;
+}
+
 h1 {
     font-size: 45px;
     margin-top: 15px;
-    // margin-left: 75px;
     display: flex; 
     justify-content: center;
 }
 
+// #splash-instructions p {
+//     font-size: 20px;
+// }
 
-// nav bar
+button {
+    background-color: transparent;
+    // background-repeat:no-repeat;
+    border: none;
+    font-size: 25px;
 
-#navbar {
-    position: absolute;
-    bottom: 0vh;
-    right: 10vh;
 }
-
-#navbar ul {
-    list-style: none;
+button:hover {
+    background-color: pink;
+    transform: scale(1.5);
 }
-
-li {
-    margin: 5px;
-}
-
-a {
-    color: black;
-}
-
-footer {
-    position: absolute;
-    bottom: 0vh;
-    left: 10vh;
-}
-
-
 
 // body{
 //     background-image: url('http://i.stack.imgur.com/kx8MT.gif');
@@ -73,10 +80,6 @@ footer {
 // }
 
 
-#end-screen {
-    display: none;
-}
-
 #timer {
     align-content: center;
     width: 1024px;
@@ -84,33 +87,9 @@ footer {
     position: absolute
 }
 
-#splash-instructions {
-    z-index: 2;
-    // position: inherit;
-}
-
-#end-screen {
-    z-index: 10;
-    position: absolute;
-}
 
 $game-font: 'VT323', monospace;
 
 html, body, button {
     font-family: $game-font;
 }
-
-
-// #background_img {
-//     position: relative;
-//     display: block;
-
-// }
-
-// #timer {
-//     background-color: black;
-//     width: 100px;
-//     height: 50px;
-//     display: flex;
-//     justify-self: center;
-// }

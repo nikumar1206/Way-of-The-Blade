@@ -8,6 +8,7 @@ export class GameView {
 
   start() {
     this.cleanupStart();
+    this.cleanupEnd();
     this.game.bindEventListeners();
     this.game.animate(this.ctx);
   }

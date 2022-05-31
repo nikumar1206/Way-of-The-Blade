@@ -22,7 +22,7 @@ const KEYS = {
   ArrowLeft: {
     pressed: false,
   },
-  Shift: {
+  Enter: {
     pressed: false,
   },
 };
@@ -199,7 +199,7 @@ export class Game {
       if (char === "e") {
         this.gamePlayer1.attack(this.gamePlayer2);
       }
-      if (char === "Shift") {
+      if (char === "Enter") {
         this.gamePlayer2.attack(this.gamePlayer1);
       }
     });
@@ -448,7 +448,7 @@ export class Game {
       }
     }
 
-    if (KEYS.Shift.pressed) {
+    if (KEYS.Enter.pressed) {
       this.gamePlayer2.attack(this.gamePlayer1);
       if (
         this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image &&
@@ -500,7 +500,6 @@ export class Game {
       this.healthbar2.update(ctx);
 
       this.player1Movement();
-
       this.player2Movement();
 
       this.gameOver();
@@ -520,15 +519,23 @@ export class Game {
       this.running = false;
       let end_screen = document.getElementById("end-screen");
       end_screen.style.display = "block";
+
+      let audio = document.getElementById("music");
+      audio.pause();
     }
   }
 
-  resetGame() {
-    // if reset button clicked, reset game here
-  }
+  //   resetGame() {
+  //     // if reset button clicked, reset game here
+  //   }
 
   winner() {
-    return this.gamePlayer1.health > 0 ? this.gamePlayer1 : this.gamePlayer2;
+    if (this.gamePlayer1.health === this.gamePlayer2.health) {
+      return;
+    }
+    return this.gamePlayer1.health > this.gamePlayer2.health
+      ? this.gamePlayer1
+      : this.gamePlayer2;
   }
 
   // isGameRunning() { // dont know if needed
