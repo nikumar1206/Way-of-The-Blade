@@ -1,15 +1,10 @@
+@import url(./styles/normalize.css);
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 
 @font-face {
     font-family: 'VT323', Regular;
     src: url("/assets/VT323/VT323-Regular.ttf");
-}
-
-canvas, img {
-    width: 1280px;
-    height: 620px;
-    position: relative;
-    display: flex;
 }
 
 canvas, img {
@@ -21,6 +16,62 @@ canvas, img {
     transform: translate(-50%, -50%);
     border: 2px solid black;
 }
+
+img {
+    z-index: 1;
+}
+canvas {
+    z-index: 2;
+}
+
+h1 {
+    font-size: 45px;
+    margin-top: 15px;
+    // margin-left: 75px;
+    display: flex; 
+    justify-content: center;
+}
+
+
+// nav bar
+
+#navbar {
+    position: absolute;
+    bottom: 0vh;
+    right: 10vh;
+}
+
+#navbar ul {
+    list-style: none;
+}
+
+li {
+    margin: 5px;
+}
+
+a {
+    color: black;
+}
+
+footer {
+    position: absolute;
+    bottom: 0vh;
+    left: 10vh;
+}
+
+
+
+// body{
+//     background-image: url('http://i.stack.imgur.com/kx8MT.gif');
+//     background-size: cover;
+//                                    POSSIBLE BACKGROUND MAYBE CODE
+    
+    
+//     height: 100vh;
+//     padding:0;
+//     margin:0;
+// }
+
 
 #end-screen {
     display: none;

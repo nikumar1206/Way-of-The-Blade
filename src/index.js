@@ -11,17 +11,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const playButton = document.getElementById("play");
-  playButton.onclick = () => {
-    let game = new Game();
-    new GameView(ctx, game).start();
-  };
+  //   const playButton = document.getElementById("play");
+  //   playButton.onclick = () => {
+  //     let game = new Game();
+  //     new GameView(ctx, game).start();
+  //   };
 
-  const replayButton = document.getElementById("playAgain");
-  replayButton.onclick = () => {
-    let game = new Game();
-    new GameView(ctx, game).start();
-  };
+  //   const replayButton = document.getElementById("playAgain");
+  //   replayButton.onclick = () => {
+  //     let game = new Game();
+  //     new GameView(ctx, game).start();
+  //   };
 });
 
 // Code that has beeen completely scrapped for now!
