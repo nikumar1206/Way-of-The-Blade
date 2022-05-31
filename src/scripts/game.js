@@ -34,36 +34,36 @@ export class Game {
       [200, 200],
       [0, 0],
       "right",
-      "./assets/martial_hero/Sprites/idleright.png",
-      2,
+      "./assets/martialhero/Sprites/idleright.png",
+      1.75,
       8,
       {
         idleRight: {
-          imageSrc: "./assets/martial_hero/Sprites/idleright.png",
+          imageSrc: "./assets/martialhero/Sprites/idleright.png",
           totalSpriteFrames: 8,
         },
         idleLeft: {
-          imageSrc: "./assets/martial_hero/Sprites/idleleft.png",
+          imageSrc: "./assets/martialhero/Sprites/idleleft.png",
           totalSpriteFrames: 8,
         },
         runLeft: {
-          imageSrc: "./assets/martial_hero/Sprites/runleft.png",
+          imageSrc: "./assets/martialhero/Sprites/runleft.png",
           totalSpriteFrames: 8,
         },
         runRight: {
-          imageSrc: "./assets/martial_hero/Sprites/runright.png",
+          imageSrc: "./assets/martialhero/Sprites/runright.png",
           totalSpriteFrames: 8,
         },
         jumpRight: {
-          imageSrc: "./assets/martial_hero/Sprites/jumpright.png",
+          imageSrc: "./assets/martialhero/Sprites/jumpright.png",
           totalSpriteFrames: 2,
         },
         jumpLeft: {
-          imageSrc: "./assets/martial_hero/Sprites/jumpleft.png",
+          imageSrc: "./assets/martialhero/Sprites/jumpleft.png",
           totalSpriteFrames: 2,
         },
         attack1right: {
-          imageSrc: "./assets/martial_hero/Sprites/attack1blueright.png",
+          imageSrc: "./assets/martialhero/Sprites/attack1blueright.png",
           totalSpriteFrames: 6,
         },
       }
@@ -75,25 +75,41 @@ export class Game {
       [200, 200],
       [0, 0],
       "left",
-      "./assets/martial_hero/Sprites/idleright.png",
-      2,
+      "./assets/martialhero2/Sprites/idleright.png",
+      1.75,
       8,
       {
         idleRight: {
-          imageSrc: "./assets/martial_hero/Sprites/idleright.png",
-          totalSpriteFrames: 8,
+          imageSrc: "./assets/martialhero2/Sprites/idleright.png",
+          totalSpriteFrames: 4,
         },
         idleLeft: {
-          imageSrc: "./assets/martial_hero/Sprites/idleleft.png",
-          totalSpriteFrames: 8,
+          imageSrc: "./assets/martialhero2/Sprites/idleleft.png",
+          totalSpriteFrames: 4,
         },
         runLeft: {
-          imageSrc: "./assets/martial_hero/Sprites/runleft.png",
+          imageSrc: "./assets/martialhero2/Sprites/runleft.png",
           totalSpriteFrames: 8,
         },
         runRight: {
-          imageSrc: "./assets/martial_hero/Sprites/runright.png",
+          imageSrc: "./assets/martialhero2/Sprites/runright.png",
           totalSpriteFrames: 8,
+        },
+        jumpRight: {
+          imageSrc: "./assets/martialhero2/Sprites/jumpright.png",
+          totalSpriteFrames: 2,
+        },
+        jumpLeft: {
+          imageSrc: "./assets/martialhero2/Sprites/jumpleft.png",
+          totalSpriteFrames: 2,
+        },
+        attack1right: {
+          imageSrc: "./assets/martialhero2/Sprites/attack1redright.png",
+          totalSpriteFrames: 4,
+        },
+        attack1left: {
+          imageSrc: "./assets/martialhero2/Sprites/attack1redleft.png",
+          totalSpriteFrames: 4,
         },
       }
     );
@@ -162,7 +178,7 @@ export class Game {
     });
   }
 
-  playerMovement() {
+  player1Movement() {
     // key inputs for player 1
     console.log(this.gamePlayer1.currFrame);
     if (
@@ -254,6 +270,87 @@ export class Game {
     }
   }
 
+  player2Movement() {
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.velX === 0 &&
+      this.gamePlayer2.velY === 0 &&
+      this.gamePlayer2.facing === "right" &&
+      this.gamePlayer2.image != this.gamePlayer2.sprites.idleRight.image
+    ) {
+      this.gamePlayer2.image = this.gamePlayer2.sprites.idleRight.image;
+      this.gamePlayer2.totalSpriteFrames =
+        this.gamePlayer2.sprites.idleRight.totalSpriteFrames;
+      this.gamePlayer2.currFrame = 0;
+      //   console.log(this.gamePlayer2.image);
+    }
+    if (
+      this.gamePlayer2.velX === 0 &&
+      this.gamePlayer2.velY === 0 &&
+      this.gamePlayer2.facing === "left" &&
+      this.gamePlayer2.image != this.gamePlayer2.sprites.idleLeft.image
+    ) {
+      this.gamePlayer2.image = this.gamePlayer2.sprites.idleLeft.image;
+      this.gamePlayer2.totalSpriteFrames =
+        this.gamePlayer2.sprites.idleLeft.totalSpriteFrames;
+      this.gamePlayer2.currFrame = 0;
+    }
+
+    if (KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 430) {
+      this.gamePlayer2.velY = -15;
+    }
+
+    if (this.gamePlayer2.velY < 0) {
+      if (this.gamePlayer2.facing === "left") {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.jumpLeft.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.jumpLeft.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      } else {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.jumpRight.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.jumpRight.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      }
+    }
+
+    if (KEYS.ArrowLeft.pressed) {
+      this.gamePlayer2.velX = -10;
+      if (this.gamePlayer2.image != this.gamePlayer2.sprites.runLeft.image) {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.runLeft.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.runLeft.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      }
+    }
+
+    if (KEYS.ArrowRight.pressed) {
+      this.gamePlayer2.velX = 10;
+      if (this.gamePlayer2.image != this.gamePlayer2.sprites.runRight.image) {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.runRight.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.runRight.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      }
+    }
+
+    if (KEYS.Shift.pressed) {
+      this.gamePlayer2.attack(this.gamePlayer1);
+      if (
+        this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image
+      ) {
+        this.gamePlayer2.image = this.gamePlayer2.sprites.attack1right.image;
+        this.gamePlayer2.totalSpriteFrames =
+          this.gamePlayer2.sprites.attack1right.totalSpriteFrames;
+        this.gamePlayer2.currFrame = 0;
+      }
+    }
+  }
+
   animate(ctx) {
     if (this.running) {
       window.requestAnimationFrame(this.animate.bind(this, ctx));
@@ -267,7 +364,9 @@ export class Game {
       this.healthbar1.update(ctx);
       this.healthbar2.update(ctx);
 
-      this.playerMovement();
+      this.player1Movement();
+
+      this.player2Movement();
 
       this.gameOver();
     }
