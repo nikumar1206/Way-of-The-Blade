@@ -23,6 +23,4 @@ window.addEventListener("DOMContentLoaded", () => {
       new GameView(ctx, game).start();
     };
   }
-
-  let aud_but = document.getElementById("audio_button");
 });

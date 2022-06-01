@@ -8,7 +8,7 @@ export class HealthBar {
     this.color = color;
   }
   colorChange() {
-    return this.player.health < 25 ? (this.color = "#B22B27") : "#71BC68";
+    return this.player.health < 25 ? "#B22B27" : "#71BC68";
   }
 
   update(ctx) {

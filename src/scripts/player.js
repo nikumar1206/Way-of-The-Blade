@@ -93,7 +93,7 @@ export class Player extends Sprite {
     this.posX += this.velX;
 
     this.posY += this.velY;
-    if (this.posY >= 425) {
+    if (this.posY >= 465) {
       // ensures characters cannot sink into canvas!
       this.velY = 0;
     } else {

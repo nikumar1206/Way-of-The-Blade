@@ -30,12 +30,12 @@ const KEYS = {
 export class Game {
   constructor() {
     this.gamePlayer1 = new Player(
-      [100, 0],
+      [25, 0],
       [150, 125],
       [0, 0],
       "right",
       "./assets/martialhero/Sprites/idleright.png",
-      1.75,
+      2,
       8,
       {
         idleRight: {
@@ -87,12 +87,12 @@ export class Game {
     window.player = this.gamePlayer1;
 
     this.gamePlayer2 = new Player(
-      [1100, 0],
+      [1220, 0],
       [150, 125],
       [0, 0],
       "left",
       "./assets/martialhero2/Sprites/idleleft.png",
-      1.75,
+      2,
       4,
       {
         idleRight: {
@@ -124,7 +124,7 @@ export class Game {
           totalSpriteFrames: 4,
         },
         attack1left: {
-          imageSrc: "./assets/martialhero2/Sprites/attack1redleft.png",
+          imageSrc: "./assets/martialhero2/Sprites/Attack2.png",
           totalSpriteFrames: 4,
         },
         flinchleft: {
@@ -504,6 +504,7 @@ export class Game {
       this.player1Movement();
       this.player2Movement();
 
+      this.handleAudio();
       this.gameOver();
     }
   }
@@ -558,5 +559,21 @@ export class Game {
     timer.id = "timer";
     timer.innerText = this.timer;
     game_cont.appendChild(timer);
+  }
+
+  handleAudio() {
+    let audio = document.getElementById("music");
+    let aud_but = document.getElementById("audio_button");
+    if (audio.paused) {
+      aud_but.innerHTML = "Play Music";
+      aud_but.onclick = () => {
+        audio.play();
+      };
+    } else {
+      aud_but.innerHTML = "Pause Music";
+      aud_but.onclick = () => {
+        audio.pause();
+      };
+    }
   }
 }
