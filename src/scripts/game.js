@@ -35,7 +35,7 @@ export class Game {
       [0, 0],
       "right",
       "./assets/martialhero/Sprites/idleright.png",
-      2,
+      1.75,
       8,
       {
         idleRight: {
@@ -92,7 +92,7 @@ export class Game {
       [0, 0],
       "left",
       "./assets/martialhero2/Sprites/idleleft.png",
-      2,
+      1.75,
       4,
       {
         idleRight: {
