@@ -24,7 +24,6 @@ export class Sprite {
   }
 
   drawSprite(ctx) {
-    // console.log(ctx);
     ctx.drawImage(
       this.image,
       this.currFrame * (this.image.width / this.totalSpriteFrames),

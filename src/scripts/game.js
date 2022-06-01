@@ -28,7 +28,8 @@ const KEYS = {
 };
 
 export class Game {
-  constructor() {
+  constructor(mode) {
+    this.mode = mode;
     this.gamePlayer1 = new Player(
       [25, 0],
       [150, 125],
@@ -84,7 +85,6 @@ export class Game {
         },
       }
     );
-    window.player = this.gamePlayer1;
 
     this.gamePlayer2 = new Player(
       [1200, 0],
@@ -158,7 +158,7 @@ export class Game {
   // }
   bindEventListeners() {
     window.addEventListener("keydown", (e) => {
-      console.log(e);
+      // console.log(e);
       let char = e.key;
       if (char in KEYS) {
         KEYS[char].pressed = true;
@@ -254,7 +254,7 @@ export class Game {
       this.gamePlayer1.totalSpriteFrames =
         this.gamePlayer1.sprites.idleLeft.totalSpriteFrames;
     }
-
+    // console.log(this.gamePlayer1.posY);
     if (KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
       this.gamePlayer1.velY = -15;
     }
@@ -340,9 +340,9 @@ export class Game {
       this.gamePlayer1.totalSpriteFrames =
         this.gamePlayer1.sprites.death.totalSpriteFrames;
       this.gamePlayer1.currFrame = 0;
-      console.log("cheese");
+      // console.log("cheese");
     }
-    console.log(this.gamePlayer1.health);
+    // console.log(this.gamePlayer1.health);
   }
 
   player2Movement() {
@@ -520,9 +520,15 @@ export class Game {
   gameOver() {
     if (this.isGameOver()) {
       this.running = false;
+
       let end_screen = document.getElementById("end-screen");
       end_screen.style.display = "block";
-
+      let p = document.querySelector("#end-screen p");
+      if (this.winner() === "Tie") {
+        p.innerText = "Game Over. It was a tie!";
+      } else {
+        p.innerText = `Game Over! ${this.winner()} has won!`;
+      }
       let audio = document.getElementById("music");
       audio.pause();
     }
@@ -534,11 +540,11 @@ export class Game {
 
   winner() {
     if (this.gamePlayer1.health === this.gamePlayer2.health) {
-      return;
+      return "Tie";
     }
     return this.gamePlayer1.health > this.gamePlayer2.health
-      ? this.gamePlayer1
-      : this.gamePlayer2;
+      ? "Player 1"
+      : "Player 2";
   }
 
   // isGameRunning() { // dont know if needed
