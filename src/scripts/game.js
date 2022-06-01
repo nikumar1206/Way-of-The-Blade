@@ -545,6 +545,7 @@ export class Game {
   // }
 
   decrementTimer() {
+    if (this.timer === 0) return;
     setInterval(() => {
       this.timer -= 1;
     }, 1000);
