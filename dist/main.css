@@ -359,8 +359,8 @@
   \**************************************************************************************************/
 #navbar {
     position: absolute;
-    bottom: -1vh;
-    right: 10vh;
+    bottom: 1vh;
+    right: 6vh;
 }
 
 #navbar ul {
@@ -379,10 +379,10 @@ a:hover {
     color: pink;
 }
 
-footer {
+#footer {
     position: absolute;
-    bottom: 0vh;
-    left: 10vh;
+    bottom: 2vh;
+    left: 7vh;
 }
 
 /*!*****************************************************************************************************************************************!*\
@@ -410,10 +410,22 @@ canvas {
   z-index: 2;
 }
 
+#body-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1400px;
+  height: 800px;
+  align-content: center;
+  transform: translate(-50%, -50%);
+}
+
 #audio_button {
   position: absolute;
-  top: 6%;
-  right: 4.8%;
+  top: 9%;
+  left: 91%;
+  text-align: center;
+  transform: translate(-50%, -50%);
 }
 
 #audio_button:hover {
@@ -439,7 +451,7 @@ canvas {
 }
 
 h1 {
-  font-size: 45px;
+  font-size: 50px;
   margin-top: 15px;
   display: flex;
   justify-content: center;
@@ -460,7 +472,9 @@ button {
   z-index: 4;
   position: absolute;
   font-size: 30px;
-  margin-left: 710px;
+  top: 10%;
+  right: 48%;
+  transform: translate(-50%, -50%);
 }
 
 html, body, button {

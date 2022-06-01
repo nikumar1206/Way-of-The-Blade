@@ -1,7 +1,7 @@
 #navbar {
     position: absolute;
-    bottom: -1vh;
-    right: 10vh;
+    bottom: 1vh;
+    right: 6vh;
 }
 
 #navbar ul {
@@ -20,8 +20,8 @@ a:hover {
     color: pink;
 }
 
-footer {
+#footer {
     position: absolute;
-    bottom: 0vh;
-    left: 10vh;
+    bottom: 2vh;
+    left: 7vh;
 }

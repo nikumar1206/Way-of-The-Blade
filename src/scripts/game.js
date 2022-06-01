@@ -550,13 +550,13 @@ export class Game {
   }
 
   displayTimer() {
+    let game_cont = document.getElementById("game-container");
     if (document.getElementById("timer")) {
-      document.body.removeChild(document.getElementById("timer"));
+      game_cont.removeChild(document.getElementById("timer"));
     }
     let timer = document.createElement("p");
     timer.id = "timer";
-    console.log(timer);
     timer.innerText = this.timer;
-    document.body.appendChild(timer);
+    game_cont.appendChild(timer);
   }
 }
