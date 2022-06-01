@@ -17,9 +17,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = () => {
+      audio.currentTime = 25;
       audio.play();
       let game = new Game();
       new GameView(ctx, game).start();
     };
   }
+
+  let aud_but = document.getElementById("audio_button");
 });

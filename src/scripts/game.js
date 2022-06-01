@@ -142,8 +142,8 @@ export class Game {
       }
     );
     // window.gamePlayer1 = this.gamePlayer1;
-    this.healthbar1 = new HealthBar([100, 0], this.gamePlayer1, "#71BC68");
-    this.healthbar2 = new HealthBar([550, 0], this.gamePlayer2, "#71BC68");
+    this.healthbar1 = new HealthBar([0, 0], this.gamePlayer1, "red");
+    this.healthbar2 = new HealthBar([1280, 0], this.gamePlayer2, "blue");
     this.timer = 60;
     this.running = true;
     this.decrementTimer();
@@ -158,6 +158,7 @@ export class Game {
   // }
   bindEventListeners() {
     window.addEventListener("keydown", (e) => {
+      console.log(e);
       let char = e.key;
       if (char in KEYS) {
         KEYS[char].pressed = true;
@@ -196,7 +197,7 @@ export class Game {
       }
 
       // allow fight
-      if (char === "e") {
+      if (char === "e" && e.shiftKey === false) {
         this.gamePlayer1.attack(this.gamePlayer2);
       }
       if (char === "Enter") {
@@ -312,7 +313,7 @@ export class Game {
       }
     }
     if (KEYS.e.pressed) {
-      this.gamePlayer1.attack(this.gamePlayer2);
+      //   this.gamePlayer1.attack(this.gamePlayer2);
       if (
         this.gamePlayer1.facing == "right" &&
         this.gamePlayer1.image != this.gamePlayer1.sprites.attack1right.image
@@ -449,7 +450,7 @@ export class Game {
     }
 
     if (KEYS.Enter.pressed) {
-      this.gamePlayer2.attack(this.gamePlayer1);
+      //   this.gamePlayer2.attack(this.gamePlayer1);
       if (
         this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image &&
         this.gamePlayer2.facing === "right"
@@ -493,6 +494,7 @@ export class Game {
       //   ctx.fillStyle = "lightblue";
       ctx.clearRect(0, 0, 1280, 620); //re-renders background
 
+      this.displayTimer();
       this.gamePlayer1.update(ctx);
       this.gamePlayer2.update(ctx); //allows movement for players
 
@@ -545,5 +547,16 @@ export class Game {
     setInterval(() => {
       this.timer -= 1;
     }, 1000);
+  }
+
+  displayTimer() {
+    if (document.getElementById("timer")) {
+      document.body.removeChild(document.getElementById("timer"));
+    }
+    let timer = document.createElement("p");
+    timer.id = "timer";
+    console.log(timer);
+    timer.innerText = this.timer;
+    document.body.appendChild(timer);
   }
 }

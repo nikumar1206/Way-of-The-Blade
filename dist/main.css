@@ -359,7 +359,7 @@
   \**************************************************************************************************/
 #navbar {
     position: absolute;
-    bottom: 0vh;
+    bottom: -1vh;
     right: 10vh;
 }
 
@@ -410,6 +410,16 @@ canvas {
   z-index: 2;
 }
 
+#audio_button {
+  position: absolute;
+  top: 6%;
+  right: 4.8%;
+}
+
+#audio_button:hover {
+  color: pink;
+}
+
 .splash {
   position: absolute;
   top: 55%;
@@ -441,16 +451,16 @@ button {
   font-size: 25px;
 }
 
-button:hover {
+.game-button:hover {
   background-color: pink;
   transform: scale(1.5);
 }
 
 #timer {
-  align-content: center;
-  width: 1024px;
-  height: 576px;
+  z-index: 4;
   position: absolute;
+  font-size: 30px;
+  margin-left: 710px;
 }
 
 html, body, button {

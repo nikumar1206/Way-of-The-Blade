@@ -10,6 +10,7 @@ export class GameView {
     this.cleanupStart();
     this.cleanupEnd();
     this.game.bindEventListeners();
+    this.game.displayTimer();
     this.game.animate(this.ctx);
   }
 
@@ -21,9 +22,5 @@ export class GameView {
   cleanupEnd() {
     let endDiv = document.getElementById("end-screen");
     endDiv.style.display = "none";
-  }
-
-  restart() {
-    this.cleanupEnd();
   }
 }
