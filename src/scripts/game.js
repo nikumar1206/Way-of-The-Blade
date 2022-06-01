@@ -87,7 +87,7 @@ export class Game {
     window.player = this.gamePlayer1;
 
     this.gamePlayer2 = new Player(
-      [1220, 0],
+      [1200, 0],
       [150, 125],
       [0, 0],
       "left",
@@ -545,7 +545,7 @@ export class Game {
   // }
 
   decrementTimer() {
-    if (this.timer === 0) return;
+    if (this.timer <= 0) return;
     setInterval(() => {
       this.timer -= 1;
     }, 1000);
