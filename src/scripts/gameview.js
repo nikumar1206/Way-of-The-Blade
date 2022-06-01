@@ -6,10 +6,21 @@ export class GameView {
     this.DIMY = document.getElementById("canvasEl").height;
   }
 
-  start() {
+  startdp() {
+    // Start dual player game
     this.cleanupStart();
     this.cleanupEnd();
-    this.game.bindEventListeners();
+    this.game.bindEventListenerPlayer1();
+    this.game.bindEventListenerPlayer2();
+    this.game.displayTimer();
+    this.game.animate(this.ctx);
+  }
+
+  startsp() {
+    // Start single player game with AI
+    this.cleanupStart();
+    this.cleanupEnd();
+    this.game.bindEventListenerPlayer1();
     this.game.displayTimer();
     this.game.animate(this.ctx);
   }

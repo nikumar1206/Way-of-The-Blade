@@ -18,13 +18,13 @@ window.addEventListener("DOMContentLoaded", () => {
       audio.currentTime = 25;
       audio.play();
       if (buttons[i].id === "play") {
-        const game = new Game("dualPlayer");
+        const game = new Game("dp"); // dual player game
         const gameview = new GameView(ctx, game);
-        gameview.start();
+        gameview.startdp();
       } else {
-        const game = new Game("singlePlayer");
+        const game = new Game("sp"); // single player game
         const gameview = new GameView(ctx, game);
-        gameview.start();
+        gameview.startsp();
       }
     };
   }

@@ -1,6 +1,7 @@
 import { HealthBar } from "./healthbar";
 import { Player } from "./player";
-const KEYS = {
+
+const P1KEYS = {
   w: {
     pressed: false,
   },
@@ -13,6 +14,9 @@ const KEYS = {
   e: {
     pressed: false,
   },
+};
+
+const P2KEYS = {
   ArrowUp: {
     pressed: false,
   },
@@ -147,29 +151,47 @@ export class Game {
     this.timer = 60;
     this.running = true;
     this.decrementTimer();
-    this.bindEventListeners();
   }
 
-  // update(ctx) {
-  //     // this.gamePlayer1.update(ctx);
-  //     // this.gamePlayer2.update(ctx);
-  //     // this.healthbar1.update(ctx);
-  //     // this.healthbar2.update(ctx);
-  // }
-  bindEventListeners() {
+  bindEventListenerPlayer1() {
     window.addEventListener("keydown", (e) => {
-      // console.log(e);
       let char = e.key;
-      if (char in KEYS) {
-        KEYS[char].pressed = true;
+      if (char in P1KEYS) {
+        P1KEYS[char].pressed = true;
       }
-
       if (char === "a") {
         this.gamePlayer1.facing = "left";
       } else if (char === "d") {
         this.gamePlayer1.facing = "right";
       }
+    });
 
+    window.addEventListener("keyup", (e) => {
+      let char = e.key;
+      if (char in P1KEYS) {
+        P1KEYS[char].pressed = false;
+      }
+
+      // stop char movement
+      if (char === "a") {
+        this.gamePlayer1.velX = 0;
+      } else if (char === "d") {
+        this.gamePlayer1.velX = 0;
+      }
+
+      // allow fight
+      if (char === "e" && e.shiftKey === false) {
+        this.gamePlayer1.attack(this.gamePlayer2);
+      }
+    });
+  }
+
+  bindEventListenerPlayer2() {
+    window.addEventListener("keydown", (e) => {
+      let char = e.key;
+      if (char in P2KEYS) {
+        P2KEYS[char].pressed = true;
+      }
       if (char === "ArrowLeft") {
         this.gamePlayer2.facing = "left";
       } else if (char === "ArrowRight") {
@@ -179,34 +201,22 @@ export class Game {
 
     window.addEventListener("keyup", (e) => {
       let char = e.key;
-      if (char in KEYS) {
-        KEYS[char].pressed = false;
+      if (char in P2KEYS) {
+        P2KEYS[char].pressed = false;
       }
-
-      if (char === "a") {
-        this.gamePlayer1.velX = 0;
-      } else if (char === "d") {
-        this.gamePlayer1.velX = 0;
-      }
-
-      // stop char movement
       if (char === "ArrowLeft") {
         this.gamePlayer2.velX = 0;
       } else if (char === "ArrowRight") {
         this.gamePlayer2.velX = 0;
       }
 
-      // allow fight
-      if (char === "e" && e.shiftKey === false) {
-        this.gamePlayer1.attack(this.gamePlayer2);
-      }
       if (char === "Enter") {
         this.gamePlayer2.attack(this.gamePlayer1);
       }
     });
   }
-
-  player1Movement() {
+  // All good so far
+  p1Movement() {
     // key inputs for player 1
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
@@ -254,10 +264,6 @@ export class Game {
       this.gamePlayer1.totalSpriteFrames =
         this.gamePlayer1.sprites.idleLeft.totalSpriteFrames;
     }
-    // console.log(this.gamePlayer1.posY);
-    if (KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
-      this.gamePlayer1.velY = -15;
-    }
 
     if (this.gamePlayer1.velY < 0) {
       if (this.gamePlayer1.facing === "left") {
@@ -273,7 +279,7 @@ export class Game {
       }
     }
 
-    if (KEYS.a.pressed) {
+    if (P1KEYS.a.pressed) {
       this.gamePlayer1.velX = -10;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runLeft.image) {
         this.gamePlayer1.image = this.gamePlayer1.sprites.runLeft.image;
@@ -283,7 +289,7 @@ export class Game {
       }
     }
 
-    if (KEYS.d.pressed) {
+    if (P1KEYS.d.pressed) {
       this.gamePlayer1.velX = 10;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runRight.image) {
         this.gamePlayer1.image = this.gamePlayer1.sprites.runRight.image;
@@ -292,7 +298,9 @@ export class Game {
         this.gamePlayer1.currFrame = 0;
       }
     }
-
+    if (P1KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
+      this.gamePlayer1.velY = -15;
+    }
     if (this.gamePlayer1.changePHB > 0) {
       if (
         this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image &&
@@ -312,7 +320,7 @@ export class Game {
         this.gamePlayer1.currFrame = 0;
       }
     }
-    if (KEYS.e.pressed) {
+    if (P1KEYS.e.pressed) {
       //   this.gamePlayer1.attack(this.gamePlayer2);
       if (
         this.gamePlayer1.facing == "right" &&
@@ -388,10 +396,9 @@ export class Game {
       this.gamePlayer2.totalSpriteFrames =
         this.gamePlayer2.sprites.idleRight.totalSpriteFrames;
       this.gamePlayer2.currFrame = 0;
-      //   console.log(this.gamePlayer2.image);
     }
 
-    if (KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {
+    if (P2KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {
       this.gamePlayer2.velY = -15;
     }
 
@@ -408,8 +415,7 @@ export class Game {
         this.gamePlayer2.currFrame = 0;
       }
     }
-
-    if (KEYS.ArrowLeft.pressed) {
+    if (P2KEYS.ArrowLeft.pressed) {
       this.gamePlayer2.velX = -10;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runLeft.image) {
         this.gamePlayer2.image = this.gamePlayer2.sprites.runLeft.image;
@@ -419,7 +425,7 @@ export class Game {
       }
     }
 
-    if (KEYS.ArrowRight.pressed) {
+    if (P2KEYS.ArrowRight.pressed) {
       this.gamePlayer2.velX = 10;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runRight.image) {
         this.gamePlayer2.image = this.gamePlayer2.sprites.runRight.image;
@@ -449,7 +455,7 @@ export class Game {
       }
     }
 
-    if (KEYS.Enter.pressed) {
+    if (P2KEYS.Enter.pressed) {
       //   this.gamePlayer2.attack(this.gamePlayer1);
       if (
         this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image &&
@@ -469,10 +475,10 @@ export class Game {
         this.gamePlayer2.currFrame = 0;
       }
     }
-    if (KEYS.ArrowLeft.pressed) {
+    if (P2KEYS.ArrowLeft.pressed) {
       this.gamePlayer2.velX = -10;
     }
-    if (KEYS.ArrowRight.pressed) {
+    if (P2KEYS.ArrowRight.pressed) {
       this.gamePlayer2.velX = 10;
     }
   }
@@ -487,6 +493,7 @@ export class Game {
       char.currFrame = 0;
     }
   }
+
   animate(ctx) {
     if (this.running) {
       window.requestAnimationFrame(this.animate.bind(this, ctx));
@@ -499,14 +506,21 @@ export class Game {
       this.gamePlayer2.update(ctx); //allows movement for players
 
       this.healthbar1.update(ctx);
-      this.healthbar2.update(ctx);
+      this.healthbar2.update(ctx); // changes the size of bar (o.g dependant on player)
 
-      this.player1Movement();
-      this.player2Movement();
-
-      this.handleAudio();
-      this.gameOver();
+      this.p1Movement();
+      if (this.mode === "dp") {
+        this.player2Movement();
+      } else {
+        this.aiMovement();
+      }
+      this.handleAudio(); // play pause button is controlled and reset per game.
+      this.gameOver(); // renders end screen on game over
     }
+  }
+
+  aiMovement() {
+    console.log("AI function is being called");
   }
 
   isGameOver() {

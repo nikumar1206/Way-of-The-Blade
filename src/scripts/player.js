@@ -40,8 +40,6 @@ export class Player extends Sprite {
     this.health = 100;
     this.changePHB = 0;
     this.attacking = false;
-    // this.tto;
-    // this.movingRight
 
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
@@ -49,32 +47,11 @@ export class Player extends Sprite {
     }
   }
 
-  // static createImgFromSprite(sprites) {
-  //     for (let sprite in this.sprites) {
-  //         sprites[sprite] = new Image();
-  //         sprites[sprite] = sprites[sprite].imageSrc
-  //         console.log(sprites[sprite]);
-  //     }
-
-  // }
-
   shiftattackRange() {
     if (this.facing === "left") {
       this.attackRange.posX = this.posX - this.attackRange.width;
       this.attackRange.posY = this.posY - 50;
     }
-  }
-
-  draw(ctx) {
-    this.shiftattackRange();
-    // ctx.fillRect(
-    //   this.attackRange.posX,
-    //   this.attackRange.posY,
-    //   this.attackRange.width,
-    //   this.attackRange.height
-    // );
-    // ctx.fillStyle = "green";
-    // ctx.fillRect(this.posX, this.posY, this.width, this.height);
   }
 
   wrap() {
@@ -103,7 +80,7 @@ export class Player extends Sprite {
     this.attackRange.posX = this.posX + this.width; // creates a attack range in front of character
     this.attackRange.posY = this.posY - 50;
 
-    this.draw(ctx);
+    this.shiftattackRange();
     this.updateSprite(ctx);
   }
 
@@ -138,11 +115,7 @@ export class Player extends Sprite {
     }, 300);
   }
 
-  // oppositePlayer() {
-  //     return this.type === "player1" ? "player2" : "player1"
-  // }
   completeHit(character2) {
-    // character2.health -= 20
     character2.changePHB = 10;
   }
 }
