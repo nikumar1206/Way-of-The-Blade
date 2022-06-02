@@ -412,6 +412,11 @@ export class Game {
   }
   aiMovement() {
     if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
       this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
     )
@@ -427,7 +432,12 @@ export class Game {
     )
       return;
     if (
-      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
+      this.gamePlayer2.image === this.gamePlayer2.sprites.runRight.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.runLeft.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
     )
       return;
@@ -448,8 +458,38 @@ export class Game {
     ) {
       this.spritehandler(this.gamePlayer2, "idleRight");
     }
-    this.gamePlayer2.velX = 5;
-    this.gamePlayer2.attack(this.gamePlayer1);
+
+    let movement_const = 5;
+    if (this.gamePlayer1.posX - this.gamePlayer2.posX > 0) {
+      this.gamePlayer2.velX = movement_const;
+    } else {
+      this.gamePlayer2.velX = -movement_const;
+    }
+
+    // if (Math.abs(this.gamePlayer1.posY - this.gamePlayer2.posY > 0)) {
+    //   this.gamePlayer2.posY = -15;
+    // } jump is glitched
+    if (this.gamePlayer2.velX > 0) {
+      this.spritehandler(this.gamePlayer2, "runRight");
+      this.gamePlayer2.facing = "right";
+    } else if (this.gamePlayer2.velX < 0) {
+      this.spritehandler(this.gamePlayer2, "runLeft");
+      this.gamePlayer2.facing = "left";
+    }
+    if (this.gamePlayer2.facing === "right" && this.gamePlayer2.energy > 2) {
+      this.gamePlayer2.attack(this.gamePlayer1);
+      this.gamePlayer2.energy = 0;
+      this.spritehandler(this.gamePlayer2, "attackright");
+    } else if (
+      this.gamePlayer2.facing === "left" &&
+      this.gamePlayer2.energy > 2
+    ) {
+      this.gamePlayer2.attack(this.gamePlayer1);
+      this.gamePlayer2.energy = 0;
+      this.spritehandler(this.gamePlayer2, "attackleft");
+    }
+    this.gamePlayer2.energy += 1;
+    console.log(this.gamePlayer2.energy);
   }
   onDeath(char) {
     if (

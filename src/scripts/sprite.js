@@ -13,7 +13,6 @@ export class Sprite {
 
     this.image = new Image();
     this.image.src = imageSrc;
-    // console.log(this.image, this.image.src);
 
     this.totalSpriteFrames = totalSpriteFrames; // will handle looping through sprite sheet
     this.currFrame = 0;
@@ -42,7 +41,6 @@ export class Sprite {
   updateSprite(ctx) {
     this.drawSprite(ctx);
     this.framesElapsed++;
-    // console.log(this.currFrame);
     if (this.framesElapsed % this.framesHold === 0) {
       if (this.currFrame < this.totalSpriteFrames - 1) {
         this.currFrame += 1;

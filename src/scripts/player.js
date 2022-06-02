@@ -40,6 +40,7 @@ export class Player extends Sprite {
     this.health = 100;
     this.changePHB = 0;
     this.attacking = false;
+    this.energy = 0;
 
     for (let sprite in this.sprites) {
       sprites[sprite].image = new Image();
