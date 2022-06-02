@@ -560,12 +560,15 @@ export class Game {
 
       let end_screen = document.getElementById("end-screen");
       end_screen.style.display = "block";
+
       let p = document.querySelector("#end-screen p");
       if (this.winner() === "Tie") {
         p.innerText = "Game Over. It was a tie!";
       } else if (this.mode === "dp") {
         p.innerText = `Game Over! ${this.winner()} has won!`;
-      } else if (this.mode === "sp" && this.winner() === "Player 2") {
+      } else if (this.mode === "sp" && this.winner() === "Player 1") {
+        p.innerText = "Game Over! You have won!";
+      } else {
         p.innerText = "Game Over! The AI has won!";
       }
       let audio = document.getElementById("music");
