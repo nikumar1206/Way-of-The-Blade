@@ -12,7 +12,7 @@ export class Player extends Sprite {
     totalSpriteFrames,
     sprites
   ) {
-    super(pos, offset, imageSrc, 50, 100, scale, totalSpriteFrames); // required!
+    super(pos, offset, imageSrc, scale, totalSpriteFrames); // required!
 
     this.posX = pos[0]; // sets up position for characters
     this.posY = pos[1];

@@ -1,5 +1,5 @@
 export class Sprite {
-  constructor(pos, offset, imageSrc, width, height, scale, totalSpriteFrames) {
+  constructor(pos, offset, imageSrc, scale, totalSpriteFrames) {
     this.pos = pos;
     this.posX = pos[0];
     this.posY = pos[1];
@@ -7,8 +7,6 @@ export class Sprite {
     this.offsetX = offset[0];
     this.offsetY = offset[1];
 
-    this.width = width;
-    this.height = height;
     this.scale = scale;
 
     this.image = new Image();
