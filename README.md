@@ -25,6 +25,8 @@ In this game, the user will be able to:
 ### Credits
  * This is my first attempt at an HTML Canvas game involving sprites and therefore needed tons of help from online resources.
  * The assets used for the samurais were originally created by Luiz Melo, and were only lightly edited by me. Check him out here: https://luizmelo.itch.io/
- * Sprite handling was something I struggled with and learned much of my sprite handling logic from: https://www.youtube.com/watch?v=vyqbNFMDRGQ
+ * I learned much of my sprite handling logic from: https://www.youtube.com/watch?v=vyqbNFMDRGQ
+ * Beat is produced by @gravybeats and can be found here: https://www.youtube.com/watch?v=t5gY6NXq2-I
  * The background GIF was pulled from the following imgur gallery: https://imgur.com/gallery/byUwco6. Original artist unknown :(
  * To ensure better and more modern browser compatibility, I used normalize.css. https://github.com/necolas/normalize.css/
+ 
