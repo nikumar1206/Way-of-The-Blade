@@ -11,6 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const audio = document.getElementById("music");
+  // const aud_but = document.getElementById("audio_button");
 
   let init_dp_butt = document.getElementById("play_fr");
   init_dp_butt.onclick = () => {
@@ -36,6 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const game = new Game("dp");
     const gameview = new GameView(ctx, game);
     gameview.startdp();
+    audio.play();
   };
 
   let start_butt_sp = document.getElementById("start_sp");
@@ -44,6 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const game = new Game("sp");
     const gameview = new GameView(ctx, game);
     gameview.startsp();
+    audio.play();
   };
 
   let homeScreen = document.getElementById("homescreen");
