@@ -26,8 +26,11 @@ export class GameView {
   }
 
   cleanupStart() {
-    let startDiv = document.getElementById("splash-instructions");
+    let startDiv = document.getElementById("splash-instructions-friends");
     startDiv.style.display = "none";
+
+    let secstartDiv = document.getElementById("splash-instructions-ai");
+    secstartDiv.style.display = "none";
   }
 
   cleanupEnd() {

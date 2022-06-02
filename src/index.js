@@ -11,29 +11,46 @@ window.addEventListener("DOMContentLoaded", () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const audio = document.getElementById("music");
-  let buttons = document.querySelectorAll("div#splash-instructions button");
 
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].onclick = () => {
-      audio.currentTime = 25;
-      audio.play();
-      if (buttons[i].id === "play") {
-        const game = new Game("dp"); // dual player game
-        const gameview = new GameView(ctx, game);
-        gameview.startdp();
-      } else {
-        const game = new Game("sp"); // single player game
-        const gameview = new GameView(ctx, game);
-        gameview.startsp();
-      }
-    };
-  }
+  let init_dp_butt = document.getElementById("play_fr");
+  init_dp_butt.onclick = () => {
+    let startDiv = document.getElementById("starting-splash");
+    startDiv.style.display = "none";
+
+    let how_to = document.getElementById("splash-instructions-friends");
+    how_to.style.display = "block";
+  };
+
+  let init_sp_butt = document.getElementById("play_ai");
+  init_sp_butt.onclick = () => {
+    let startDiv = document.getElementById("starting-splash");
+    startDiv.style.display = "none";
+
+    let how_to = document.getElementById("splash-instructions-friends");
+    how_to.style.display = "block";
+  };
+
+  let start_butt_dp = document.getElementById("start_dp");
+  start_butt_dp.onclick = () => {
+    console.log("clicked dp");
+    const game = new Game("dp");
+    const gameview = new GameView(ctx, game);
+    gameview.startdp();
+  };
+
+  let start_butt_sp = document.getElementById("start_sp");
+  start_butt_sp.onclick = () => {
+    console.log("clicked sp");
+    const game = new Game("sp");
+    const gameview = new GameView(ctx, game);
+    gameview.startsp();
+  };
 
   let homeScreen = document.getElementById("homescreen");
   homeScreen.onclick = () => {
     let endDiv = document.getElementById("end-screen");
     endDiv.style.display = "none";
-    let startDiv = document.getElementById("splash-instructions");
+    let startDiv = document.getElementById("starting-splash");
     startDiv.style.display = "";
   };
 });

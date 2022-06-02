@@ -25,9 +25,6 @@ canvas {
     z-index: 2;
 }
 
-// splash {
-    
-// }
 
 #body-container {
     position: absolute;
@@ -58,12 +55,16 @@ canvas {
     font-size: 20px;
 }
 
-#splash-instructions {
+#starting-splash {
     z-index: 3;
 }
+#splash-instructions-friends, #splash-instructions-ai {
+    z-index: 10;
+    display: none;
 
+}
 #end-screen {
-    z-index: 4;
+    z-index: 5;
     display: none;
 }
 
@@ -74,17 +75,17 @@ h1 {
     justify-content: center;
 }
 
-// #splash-instructions p {
-//     font-size: 20px;
-// }
+.splash p {
+    font-size: 25px;
+}
 
 button {
     background-color: transparent;
-    // background-repeat:no-repeat;
     border: none;
     font-size: 25px;
 
 }
+
 .game-button:hover {
     background-color: pink;
     transform: scale(1.5);
@@ -115,4 +116,5 @@ $game-font: 'VT323', monospace;
 
 html, body, button {
     font-family: $game-font;
+    overflow: hidden
 }

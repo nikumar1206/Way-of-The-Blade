@@ -443,12 +443,17 @@ canvas {
   font-size: 20px;
 }
 
-#splash-instructions {
+#starting-splash {
   z-index: 3;
 }
 
+#splash-instructions-friends, #splash-instructions-ai {
+  z-index: 10;
+  display: none;
+}
+
 #end-screen {
-  z-index: 4;
+  z-index: 5;
   display: none;
 }
 
@@ -457,6 +462,10 @@ h1 {
   top: 20%;
   display: flex;
   justify-content: center;
+}
+
+.splash p {
+  font-size: 25px;
 }
 
 button {
@@ -491,4 +500,5 @@ button {
 
 html, body, button {
   font-family: "VT323", monospace;
+  overflow: hidden;
 }
