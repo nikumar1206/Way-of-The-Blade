@@ -1,0 +1,24 @@
+/* handles buttons */
+#audio_button {
+    z-index: 5;
+    position: absolute;
+    top: 9%;
+    left: 91%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+#audio_button:hover {
+    color: pink;
+}
+
+.game-button:hover {
+    background-color: pink;
+    transform: scale(1.5);
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    font-family: $game-font;
+}

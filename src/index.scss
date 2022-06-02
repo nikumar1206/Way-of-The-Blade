@@ -1,12 +1,20 @@
 @import url(./styles/normalize.css);
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-@import url(./styles/nav.css);
 
+@import url(./styles/nav_footer.css);
+@import url(./styles/splash.css);
+@import url(./styles/button.css);
+
+// handle fonts
 @font-face {
     font-family: 'VT323', Regular;
     src: url("/assets/VT323/VT323-Regular.ttf");
 }
 
+$game-font: 'VT323', monospace;
+
+
+// tie html canvas to background canvas image in the center
 canvas, #canvas_img {
     width: 1280px;
     height: 620px;
@@ -18,15 +26,13 @@ canvas, #canvas_img {
     border: 2px solid black;
 }
 
-body-container {
-    z-index: 1;
+html, body {
+    overflow: hidden;
+    font-family: 'VT323', Regular;
 }
-canvas {
-    z-index: 2;
-}
-
 
 #body-container {
+    z-index: 1;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,60 +41,9 @@ canvas {
     align-content: center;
     transform: translate(-50%, -50%);
 }
-#audio_button {
-    z-index: 5;
-    position: absolute;
-    top: 9%;
-    left: 91%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-}
-#audio_button:hover {
-    color: pink;
-}
-.splash {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-}
 
-#starting-splash {
-    z-index: 3;
-}
-#splash-instructions-friends, #splash-instructions-ai {
-    z-index: 10;
-    display: none;
-
-}
-#end-screen {
-    z-index: 5;
-    display: none;
-}
-
-h1 {
-    font-size: 50px;
-    top: 20%;
-    display: flex;
-    justify-content: center;
-}
-
-.splash p {
-    font-size: 25px;
-}
-
-button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-
-}
-
-.game-button:hover {
-    background-color: pink;
-    transform: scale(1.5);
+canvas {
+    z-index: 2;
 }
 
 #background_img {
@@ -111,10 +66,9 @@ button {
     transform: translate(-50%, -50%);
 }
 
-
-$game-font: 'VT323', monospace;
-
-html, body, button {
-    font-family: $game-font;
-    overflow: hidden
+h1 {
+    font-size: 50px;
+    top: 20%;
+    display: flex;
+    justify-content: center;
 }

@@ -354,9 +354,9 @@
   [hidden] {
     display: none;
   }
-/*!**************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/nav.css ***!
-  \**************************************************************************************************/
+/*!*********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/nav_footer.css ***!
+  \*********************************************************************************************************/
 #navbar {
     position: absolute;
     bottom: 1vh;
@@ -385,6 +385,64 @@ a:hover {
     left: 7vh;
 }
 
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/splash.css ***!
+  \*****************************************************************************************************/
+/* handle splash divs */
+.splash {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+#starting-splash {
+    z-index: 3;
+}
+#splash-instructions-friends, #splash-instructions-ai {
+    z-index: 10;
+    display: none;
+
+}
+#end-screen {
+    z-index: 5;
+    display: none;
+}
+
+.splash p {
+    font-size: 25px;
+}
+
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/button.css ***!
+  \*****************************************************************************************************/
+/* handles buttons */
+#audio_button {
+    z-index: 5;
+    position: absolute;
+    top: 9%;
+    left: 91%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+#audio_button:hover {
+    color: pink;
+}
+
+.game-button:hover {
+    background-color: pink;
+    transform: scale(1.5);
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    font-family: $game-font;
+}
+
 /*!*****************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
   \*****************************************************************************************************************************************/
@@ -403,15 +461,13 @@ canvas, #canvas_img {
   border: 2px solid black;
 }
 
-body-container {
-  z-index: 1;
-}
-
-canvas {
-  z-index: 2;
+html, body {
+  overflow: hidden;
+  font-family: "VT323", Regular;
 }
 
 #body-container {
+  z-index: 1;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -421,62 +477,8 @@ canvas {
   transform: translate(-50%, -50%);
 }
 
-#audio_button {
-  z-index: 5;
-  position: absolute;
-  top: 9%;
-  left: 91%;
-  text-align: center;
-  transform: translate(-50%, -50%);
-}
-
-#audio_button:hover {
-  color: pink;
-}
-
-.splash {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  text-align: center;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-}
-
-#starting-splash {
-  z-index: 3;
-}
-
-#splash-instructions-friends, #splash-instructions-ai {
-  z-index: 10;
-  display: none;
-}
-
-#end-screen {
-  z-index: 5;
-  display: none;
-}
-
-h1 {
-  font-size: 50px;
-  top: 20%;
-  display: flex;
-  justify-content: center;
-}
-
-.splash p {
-  font-size: 25px;
-}
-
-button {
-  background-color: transparent;
-  border: none;
-  font-size: 25px;
-}
-
-.game-button:hover {
-  background-color: pink;
-  transform: scale(1.5);
+canvas {
+  z-index: 2;
 }
 
 #background_img {
@@ -498,7 +500,9 @@ button {
   transform: translate(-50%, -50%);
 }
 
-html, body, button {
-  font-family: "VT323", monospace;
-  overflow: hidden;
+h1 {
+  font-size: 50px;
+  top: 20%;
+  display: flex;
+  justify-content: center;
 }

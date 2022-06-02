@@ -1,0 +1,26 @@
+/* handle splash divs */
+.splash {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+#starting-splash {
+    z-index: 3;
+}
+#splash-instructions-friends, #splash-instructions-ai {
+    z-index: 10;
+    display: none;
+
+}
+#end-screen {
+    z-index: 5;
+    display: none;
+}
+
+.splash p {
+    font-size: 25px;
+}
