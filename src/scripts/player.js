@@ -7,6 +7,7 @@ export class Player extends Sprite {
     offset,
     vel,
     facing,
+    type,
     imageSrc,
     scale,
     totalSpriteFrames,
@@ -22,7 +23,7 @@ export class Player extends Sprite {
 
     this.facing = facing;
     this.sprites = sprites;
-    // this.type = type
+    this.type = type;
     this.width = 50;
     this.height = 100; // character size
 

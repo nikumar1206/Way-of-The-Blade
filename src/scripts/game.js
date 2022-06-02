@@ -39,6 +39,7 @@ export class Game {
       [150, 125],
       [0, 0],
       "right",
+      "player1",
       "./assets/martialhero/Sprites/idleright.png",
       1.75,
       8,
@@ -95,6 +96,7 @@ export class Game {
       [150, 125],
       [0, 0],
       "left",
+      "player2",
       "./assets/martialhero2/Sprites/idleleft.png",
       1.75,
       4,
@@ -146,8 +148,8 @@ export class Game {
       }
     );
     // window.gamePlayer1 = this.gamePlayer1;
-    this.healthbar1 = new HealthBar([0, 0], this.gamePlayer1, "red");
-    this.healthbar2 = new HealthBar([1280, 0], this.gamePlayer2, "blue");
+    this.healthbar1 = new HealthBar([0, 0], this.gamePlayer1);
+    this.healthbar2 = new HealthBar([1280, 0], this.gamePlayer2);
     this.timer = 60;
     this.running = true;
     this.decrementTimer();
@@ -219,11 +221,11 @@ export class Game {
 
   p1Movement() {
     // key inputs for player 1
-    if (
-      this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
-      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
-    )
-      return;
+    // if (
+    //   this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
+    //   this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    // )
+    //   return;
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.attack1left.image &&
       this.gamePlayer1.currFrame < this.gamePlayer1.totalSpriteFrames - 1
@@ -311,20 +313,20 @@ export class Game {
         this.spritehandler(this.gamePlayer1, "attackleft");
       }
     }
-    if (
-      this.gamePlayer1.health <= 0 &&
-      this.gamePlayer1.image != this.gamePlayer1.sprites.death.image
-    ) {
-      this.spritehandler(this.gamePlayer1, "death");
-    }
+    // if (
+    //   this.gamePlayer1.health <= 0 &&
+    //   this.gamePlayer1.image != this.gamePlayer1.sprites.death.image
+    // ) {
+    //   this.spritehandler(this.gamePlayer1, "death");
+    // }
   }
 
   p2Movement() {
-    if (
-      this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
-      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
-    )
-      return;
+    // if (
+    //   this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
+    //   this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    // )
+    //   return;
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.attack1left.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
@@ -511,16 +513,16 @@ export class Game {
       this.gamePlayer1.changePHB += 15;
     }
   }
-  onDeath(char) {
-    if (
-      char.health === 0 &&
-      char.image != char.gamePlayer1.sprites.death.image
-    ) {
-      char.image = char.gamePlayer1.sprites.death.image;
-      char.totalSpriteFrames = char.sprites.death.totalSpriteFrames;
-      char.currFrame = 0;
-    }
-  }
+  // onDeath(char) {
+  //   if (
+  //     char.health === 0 &&
+  //     char.image != char.gamePlayer1.sprites.death.image
+  //   ) {
+  //     char.image = char.gamePlayer1.sprites.death.image;
+  //     char.totalSpriteFrames = char.sprites.death.totalSpriteFrames;
+  //     char.currFrame = 0;
+  //   }
+  // }
 
   animate(ctx) {
     if (this.running) {

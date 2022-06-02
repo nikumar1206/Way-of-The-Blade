@@ -415,34 +415,6 @@ a:hover {
     font-size: 25px;
 }
 
-/*!*****************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/button.css ***!
-  \*****************************************************************************************************/
-/* handles buttons */
-#audio_button {
-    z-index: 5;
-    position: absolute;
-    top: 9%;
-    left: 91%;
-    text-align: center;
-    transform: translate(-50%, -50%);
-}
-#audio_button:hover {
-    color: pink;
-}
-
-.game-button:hover {
-    background-color: pink;
-    transform: scale(1.5);
-}
-
-button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-    font-family: $game-font;
-}
-
 /*!*****************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss (1) ***!
   \*****************************************************************************************************************************************/
@@ -491,6 +463,39 @@ canvas {
   opacity: 0.2;
 }
 
+h1 {
+  font-size: 50px;
+  top: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+/* handles buttons */
+#audio_button {
+  z-index: 5;
+  position: absolute;
+  top: 9%;
+  left: 91%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+#audio_button:hover {
+  color: pink;
+}
+
+.game-button:hover {
+  background-color: pink;
+  transform: scale(1.5);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  font-family: "VT323", monospace;
+}
+
 #timer {
   z-index: 4;
   position: absolute;
@@ -498,11 +503,4 @@ canvas {
   top: 10%;
   right: 48%;
   transform: translate(-50%, -50%);
-}
-
-h1 {
-  font-size: 50px;
-  top: 20%;
-  display: flex;
-  justify-content: center;
 }
