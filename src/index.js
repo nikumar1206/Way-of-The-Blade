@@ -27,17 +27,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let startDiv = document.getElementById("starting-splash");
     startDiv.style.display = "none";
 
-    let how_to = document.getElementById("splash-instructions-friends");
+    let how_to = document.getElementById("splash-instructions-ai");
     how_to.style.display = "block";
-  };
-
-  let start_butt_dp = document.getElementById("start_dp");
-  start_butt_dp.onclick = () => {
-    console.log("clicked dp");
-    const game = new Game("dp");
-    const gameview = new GameView(ctx, game);
-    gameview.startdp();
-    audio.play();
   };
 
   let start_butt_sp = document.getElementById("start_sp");
@@ -46,6 +37,15 @@ window.addEventListener("DOMContentLoaded", () => {
     const game = new Game("sp");
     const gameview = new GameView(ctx, game);
     gameview.startsp();
+    audio.play();
+  };
+
+  let start_butt_dp = document.getElementById("start_dp");
+  start_butt_dp.onclick = () => {
+    console.log("clicked dp");
+    const game = new Game("dp");
+    const gameview = new GameView(ctx, game);
+    gameview.startdp();
     audio.play();
   };
 
