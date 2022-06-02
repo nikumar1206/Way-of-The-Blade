@@ -249,9 +249,7 @@ export class Game {
       this.gamePlayer1.facing === "right" &&
       this.gamePlayer1.image != this.gamePlayer1.sprites.idleRight.image
     ) {
-      this.gamePlayer1.image = this.gamePlayer1.sprites.idleRight.image;
-      this.gamePlayer1.totalSpriteFrames =
-        this.gamePlayer1.sprites.idleRight.totalSpriteFrames;
+      this.spritehandler(this.gamePlayer1, "idleRight");
     }
     if (
       this.gamePlayer1.velX === 0 &&
@@ -259,42 +257,28 @@ export class Game {
       this.gamePlayer1.facing === "left" &&
       this.gamePlayer1.image != this.gamePlayer1.sprites.idleLeft.image
     ) {
-      this.gamePlayer1.image = this.gamePlayer1.sprites.idleLeft.image;
-      this.gamePlayer1.totalSpriteFrames =
-        this.gamePlayer1.sprites.idleLeft.totalSpriteFrames;
+      this.spritehandler(this.gamePlayer1, "idleLeft");
     }
 
     if (this.gamePlayer1.velY < 0) {
       if (this.gamePlayer1.facing === "left") {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.jumpLeft.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.jumpLeft.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "jumpLeft");
       } else {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.jumpRight.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.jumpRight.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "jumpRight");
       }
     }
 
     if (P1KEYS.a.pressed) {
       this.gamePlayer1.velX = -10;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runLeft.image) {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.runLeft.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.runLeft.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "runLeft");
       }
     }
 
     if (P1KEYS.d.pressed) {
       this.gamePlayer1.velX = 10;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runRight.image) {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.runRight.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.runRight.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "runRight");
       }
     }
     if (P1KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
@@ -305,18 +289,12 @@ export class Game {
         this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image &&
         this.gamePlayer1.facing === "left"
       ) {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.flinchleft.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.flinchleft.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "flinchLeft");
       } else if (
-        this.gamePlayer1.image != this.gamePlayer1.sprites.flinchleft.image &&
+        this.gamePlayer1.image != this.gamePlayer1.sprites.flinchright.image &&
         this.gamePlayer1.facing === "right"
       ) {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.flinchright.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.flinchright.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "flinchRight");
       }
     }
     if (P1KEYS.e.pressed) {
@@ -324,94 +302,22 @@ export class Game {
         this.gamePlayer1.facing == "right" &&
         this.gamePlayer1.image != this.gamePlayer1.sprites.attack1right.image
       ) {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.attack1right.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.attack1right.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "attackright");
       } else if (
         this.gamePlayer1.facing == "left" &&
         this.gamePlayer1.image != this.gamePlayer1.sprites.attack1left.image
       ) {
-        this.gamePlayer1.image = this.gamePlayer1.sprites.attack1left.image;
-        this.gamePlayer1.totalSpriteFrames =
-          this.gamePlayer1.sprites.attack1left.totalSpriteFrames;
-        this.gamePlayer1.currFrame = 0;
+        this.spritehandler(this.gamePlayer1, "attackleft");
       }
     }
     if (
       this.gamePlayer1.health <= 0 &&
       this.gamePlayer1.image != this.gamePlayer1.sprites.death.image
     ) {
-      this.gamePlayer1.image = this.gamePlayer1.sprites.death.image;
-      this.gamePlayer1.totalSpriteFrames =
-        this.gamePlayer1.sprites.death.totalSpriteFrames;
-      this.gamePlayer1.currFrame = 0;
+      this.spritehandler(this.gamePlayer1, "death");
     }
   }
 
-  player2spritehandler(sprite) {
-    switch (sprite) {
-      case "idleLeft":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.idleLeft.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.idleLeft.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "idleRight":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.idleRight.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.idleRight.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "jumpLeft":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.jumpLeft.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.jumpLeft.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "jumpRight":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.jumpRight.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.jumpRight.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "runLeft":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.runLeft.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.runLeft.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "runRight":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.runRight.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.runRight.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "flinchLeft":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.flinchleft.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.flinchleft.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "flinchRight":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.flinchright.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.flinchright.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-      case "attackright":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.attack1right.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.attack1right.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-      case "attackleft":
-        this.gamePlayer2.image = this.gamePlayer2.sprites.attack1left.image;
-        this.gamePlayer2.totalSpriteFrames =
-          this.gamePlayer2.sprites.attack1left.totalSpriteFrames;
-        this.gamePlayer2.currFrame = 0;
-        break;
-    }
-  }
   player2Movement() {
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
@@ -439,7 +345,7 @@ export class Game {
       this.gamePlayer2.facing === "left" &&
       this.gamePlayer2.image != this.gamePlayer2.sprites.idleLeft.image
     ) {
-      this.player2spritehandler("idleLeft");
+      this.spritehandler(this.gamePlayer2, "idleLeft");
     }
 
     if (
@@ -448,7 +354,7 @@ export class Game {
       this.gamePlayer2.facing === "right" &&
       this.gamePlayer2.image != this.gamePlayer2.sprites.idleRight.image
     ) {
-      this.player2spritehandler("idleRight");
+      this.spritehandler(this.gamePlayer2, "idleRight");
     }
 
     if (P2KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {
@@ -457,22 +363,22 @@ export class Game {
 
     if (this.gamePlayer2.velY < 0) {
       if (this.gamePlayer2.facing === "left") {
-        this.player2spritehandler("jumpLeft");
+        this.spritehandler(this.gamePlayer2, "jumpLeft");
       } else {
-        this.player2spritehandler("jumpRight");
+        this.spritehandler(this.gamePlayer2, "jumpRight");
       }
     }
     if (P2KEYS.ArrowLeft.pressed) {
       this.gamePlayer2.velX = -10;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runLeft.image) {
-        this.player2spritehandler("runLeft");
+        this.spritehandler(this.gamePlayer2, "runLeft");
       }
     }
 
     if (P2KEYS.ArrowRight.pressed) {
       this.gamePlayer2.velX = 10;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runRight.image) {
-        this.player2spritehandler("runRight");
+        this.spritehandler(this.gamePlayer2, "runRight");
       }
     }
 
@@ -481,12 +387,12 @@ export class Game {
         this.gamePlayer2.image != this.gamePlayer2.sprites.flinchleft.image &&
         this.gamePlayer2.facing === "left"
       ) {
-        this.player2spritehandler("flinchLeft");
+        this.spritehandler(this.gamePlayer2, "flinchLeft");
       } else if (
         this.gamePlayer2.image != this.gamePlayer2.sprites.flinchleft.image &&
         this.gamePlayer2.facing === "right"
       ) {
-        this.player2spritehandler("flinchRight");
+        this.spritehandler(this.gamePlayer2, "flinchRight");
       }
     }
 
@@ -495,12 +401,12 @@ export class Game {
         this.gamePlayer2.image != this.gamePlayer2.sprites.attack1right.image &&
         this.gamePlayer2.facing === "right"
       ) {
-        this.player2spritehandler("attackright");
+        this.spritehandler(this.gamePlayer2, "attackright");
       } else if (
         this.gamePlayer2.image != this.gamePlayer2.sprites.attack1left.image &&
         this.gamePlayer2.facing === "left"
       ) {
-        this.player2spritehandler("attackleft");
+        this.spritehandler(this.gamePlayer2, "attackleft");
       }
     }
   }
@@ -611,6 +517,61 @@ export class Game {
       aud_but.onclick = () => {
         audio.pause();
       };
+    }
+  }
+
+  // helper functions!
+  spritehandler(char, sprite) {
+    switch (sprite) {
+      case "idleLeft":
+        char.image = char.sprites.idleLeft.image;
+        char.totalSpriteFrames = char.sprites.idleLeft.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "idleRight":
+        char.image = char.sprites.idleRight.image;
+        char.totalSpriteFrames = char.sprites.idleRight.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "jumpLeft":
+        char.image = char.sprites.jumpLeft.image;
+        char.totalSpriteFrames = char.sprites.jumpLeft.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "jumpRight":
+        char.image = char.sprites.jumpRight.image;
+        char.totalSpriteFrames = char.sprites.jumpRight.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "runLeft":
+        char.image = char.sprites.runLeft.image;
+        char.totalSpriteFrames = char.sprites.runLeft.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "runRight":
+        char.image = char.sprites.runRight.image;
+        char.totalSpriteFrames = char.sprites.runRight.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "flinchLeft":
+        char.image = char.sprites.flinchleft.image;
+        char.totalSpriteFrames = char.sprites.flinchleft.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "flinchRight":
+        char.image = char.sprites.flinchright.image;
+        char.totalSpriteFrames = char.sprites.flinchright.totalSpriteFrames;
+        char.currFrame = 0;
+      case "attackright":
+        char.image = char.sprites.attack1right.image;
+        char.totalSpriteFrames = char.sprites.attack1right.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
+      case "attackleft":
+        char.image = char.sprites.attack1left.image;
+        char.totalSpriteFrames = char.sprites.attack1left.totalSpriteFrames;
+        char.currFrame = 0;
+        break;
     }
   }
 }
