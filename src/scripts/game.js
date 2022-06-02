@@ -294,17 +294,17 @@ export class Game {
         this.gamePlayer1.image != this.gamePlayer1.sprites.flinchright.image &&
         this.gamePlayer1.facing === "right"
       ) {
-        this.spritehandler(this.gamePlayer1, "flinchRight");
+        // this.spritehandler(this.gamePlayer1, "flinchRight");
       }
     }
     if (P1KEYS.e.pressed) {
       if (
-        this.gamePlayer1.facing == "right" &&
+        this.gamePlayer1.facing === "right" &&
         this.gamePlayer1.image != this.gamePlayer1.sprites.attack1right.image
       ) {
         this.spritehandler(this.gamePlayer1, "attackright");
       } else if (
-        this.gamePlayer1.facing == "left" &&
+        this.gamePlayer1.facing === "left" &&
         this.gamePlayer1.image != this.gamePlayer1.sprites.attack1left.image
       ) {
         this.spritehandler(this.gamePlayer1, "attackleft");
@@ -318,7 +318,7 @@ export class Game {
     }
   }
 
-  player2Movement() {
+  p2Movement() {
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
       this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
@@ -410,7 +410,47 @@ export class Game {
       }
     }
   }
+  aiMovement() {
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
+      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchright.image &&
+      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1left.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.velX === 0 &&
+      this.gamePlayer2.velY === 0 &&
+      this.gamePlayer2.facing === "left" &&
+      this.gamePlayer2.image != this.gamePlayer2.sprites.idleLeft.image
+    ) {
+      this.spritehandler(this.gamePlayer2, "idleLeft");
+    }
 
+    if (
+      this.gamePlayer2.velX === 0 &&
+      this.gamePlayer2.velY === 0 &&
+      this.gamePlayer2.facing === "right" &&
+      this.gamePlayer2.image != this.gamePlayer2.sprites.idleRight.image
+    ) {
+      this.spritehandler(this.gamePlayer2, "idleRight");
+    }
+    this.gamePlayer2.velX = 5;
+    this.gamePlayer2.attack(this.gamePlayer1);
+  }
   onDeath(char) {
     if (
       char.health === 0 &&
@@ -426,7 +466,6 @@ export class Game {
     if (this.running) {
       window.requestAnimationFrame(this.animate.bind(this, ctx));
 
-      //   ctx.fillStyle = "lightblue";
       ctx.clearRect(0, 0, 1280, 620); //re-renders background
 
       this.displayTimer();
@@ -438,17 +477,13 @@ export class Game {
 
       this.p1Movement();
       if (this.mode === "dp") {
-        this.player2Movement();
+        this.p2Movement();
       } else {
         this.aiMovement();
       }
       this.handleAudio(); // play pause button is controlled and reset per game.
       this.gameOver(); // renders end screen on game over
     }
-  }
-
-  aiMovement() {
-    console.log("AI function is being called");
   }
 
   isGameOver() {
@@ -562,6 +597,7 @@ export class Game {
         char.image = char.sprites.flinchright.image;
         char.totalSpriteFrames = char.sprites.flinchright.totalSpriteFrames;
         char.currFrame = 0;
+        break;
       case "attackright":
         char.image = char.sprites.attack1right.image;
         char.totalSpriteFrames = char.sprites.attack1right.totalSpriteFrames;
