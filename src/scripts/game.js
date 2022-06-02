@@ -216,20 +216,11 @@ export class Game {
     });
   }
   // All good so far
+
   p1Movement() {
     // key inputs for player 1
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
-      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
-    )
-      return;
-    if (
-      this.gamePlayer1.image === this.gamePlayer1.sprites.flinchleft.image &&
-      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
-    )
-      return;
-    if (
-      this.gamePlayer1.image === this.gamePlayer1.sprites.flinchright.image &&
       this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
     )
       return;
@@ -241,6 +232,16 @@ export class Game {
     if (
       this.gamePlayer1.image === this.gamePlayer1.sprites.attack1right.image &&
       this.gamePlayer1.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer1.image === this.gamePlayer1.sprites.flinchleft.image &&
+      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer1.image === this.gamePlayer1.sprites.flinchright.image &&
+      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
     )
       return;
     if (
@@ -320,13 +321,8 @@ export class Game {
 
   p2Movement() {
     if (
-      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
-      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
-    )
-      return;
-    if (
-      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchright.image &&
-      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+      this.gamePlayer1.image === this.gamePlayer1.sprites.death.image &&
+      this.currFrame < this.gamePlayer1.totalSpriteFrames - 1
     )
       return;
     if (
@@ -337,6 +333,17 @@ export class Game {
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
+      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+
+    if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.flinchright.image &&
+      this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
     )
       return;
     if (
@@ -417,6 +424,11 @@ export class Game {
     )
       return;
     if (
+      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1left.image &&
+      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
+    )
+      return;
+    if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.flinchleft.image &&
       this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
     )
@@ -424,11 +436,6 @@ export class Game {
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.flinchright.image &&
       this.currFrame < this.gamePlayer2.totalSpriteFrames - 1
-    )
-      return;
-    if (
-      this.gamePlayer2.image === this.gamePlayer2.sprites.attack1left.image &&
-      this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
     )
       return;
     if (
@@ -459,16 +466,20 @@ export class Game {
       this.spritehandler(this.gamePlayer2, "idleRight");
     }
 
-    let movement_const = 5;
+    let movement_const = 7;
     if (this.gamePlayer1.posX - this.gamePlayer2.posX > 0) {
       this.gamePlayer2.velX = movement_const;
     } else {
       this.gamePlayer2.velX = -movement_const;
     }
 
-    // if (Math.abs(this.gamePlayer1.posY - this.gamePlayer2.posY > 0)) {
-    //   this.gamePlayer2.posY = -15;
-    // } jump is glitched
+    // if (
+    //   Math.abs(this.gamePlayer1.posY - this.gamePlayer2.posY) > 10 &&
+    //   this.gamePlayer2.energy > 1
+    // ) {
+    //   this.gamePlayer2.posY = -1;
+    //   this.gamePlayer2.energy = 0;
+    // } jump handler broken
     if (this.gamePlayer2.velX > 0) {
       this.spritehandler(this.gamePlayer2, "runRight");
       this.gamePlayer2.facing = "right";
@@ -476,20 +487,29 @@ export class Game {
       this.spritehandler(this.gamePlayer2, "runLeft");
       this.gamePlayer2.facing = "left";
     }
-    if (this.gamePlayer2.facing === "right" && this.gamePlayer2.energy > 2) {
+
+    if (
+      this.gamePlayer2.facing === "right" &&
+      this.gamePlayer2.energy > 1 &&
+      Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
+    ) {
       this.gamePlayer2.attack(this.gamePlayer1);
       this.gamePlayer2.energy = 0;
       this.spritehandler(this.gamePlayer2, "attackright");
     } else if (
       this.gamePlayer2.facing === "left" &&
-      this.gamePlayer2.energy > 2
+      this.gamePlayer2.energy > 1 &&
+      Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
       this.gamePlayer2.energy = 0;
       this.spritehandler(this.gamePlayer2, "attackleft");
     }
     this.gamePlayer2.energy += 1;
-    console.log(this.gamePlayer2.energy);
+
+    if (this.gamePlayer1.changePHB > 5) {
+      this.gamePlayer1.changePHB += 15;
+    }
   }
   onDeath(char) {
     if (
@@ -543,8 +563,10 @@ export class Game {
       let p = document.querySelector("#end-screen p");
       if (this.winner() === "Tie") {
         p.innerText = "Game Over. It was a tie!";
-      } else {
+      } else if (this.mode === "dp") {
         p.innerText = `Game Over! ${this.winner()} has won!`;
+      } else if (this.mode === "sp" && this.winner() === "Player 2") {
+        p.innerText = "Game Over! The AI has won!";
       }
       let audio = document.getElementById("music");
       audio.pause();

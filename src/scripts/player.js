@@ -12,12 +12,12 @@ export class Player extends Sprite {
     totalSpriteFrames,
     sprites
   ) {
-    super(pos, offset, imageSrc, 25, 100, scale, totalSpriteFrames); // required!
+    super(pos, offset, imageSrc, 50, 100, scale, totalSpriteFrames); // required!
 
     this.posX = pos[0]; // sets up position for characters
     this.posY = pos[1];
 
-    this.velX = vel[0]; // sets up velocity for characters
+    this.velX = vel[0]; // sets up direction for characters
     this.velY = vel[1];
 
     this.facing = facing;
@@ -119,4 +119,19 @@ export class Player extends Sprite {
   completeHit(character2) {
     character2.changePHB = 10;
   }
+
+  // for testing purposes
+  // draw(ctx) {
+  //   // attack range
+  //   ctx.fillStyle = "red";
+  //   ctx.fillRect(
+  //     this.attackRange.posX,
+  //     this.attackRange.posY,
+  //     this.attackRange.width,
+  //     this.attackRange.height
+  //   );
+
+  //   ctx.fillStyle = "green";
+  //   ctx.fillRect(this.posX, this.posY, this.width, this.height);
+  // }
 }
