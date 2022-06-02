@@ -16,7 +16,7 @@ export class Sprite {
     this.currFrame = 0;
     this.framesComplete = 0;
 
-    this.framesElapsed = 0; // will handle slowing down animation to what we want
+    this.framesElapsed = 0; // sprites change every 5 frames
     this.framesHold = 5;
   }
 
@@ -27,8 +27,6 @@ export class Sprite {
       0,
       this.image.width / this.totalSpriteFrames,
       this.image.height,
-      //   this.posX,
-      //   this.posY,
       this.posX - this.offsetX,
       this.posY - this.offsetY,
       (this.image.width / this.totalSpriteFrames) * this.scale,

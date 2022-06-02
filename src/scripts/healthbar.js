@@ -6,6 +6,8 @@ export class HealthBar {
     this.maxWidth = 600;
     this.maxHeight = 20;
   }
+
+  // red or blue dependant on amount of health
   colorChange() {
     return this.player.health < 25 ? "#B22B27" : "#71BC68";
   }

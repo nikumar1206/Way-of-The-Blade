@@ -150,6 +150,7 @@ export class Game {
     // window.gamePlayer1 = this.gamePlayer1;
     this.healthbar1 = new HealthBar([0, 0], this.gamePlayer1);
     this.healthbar2 = new HealthBar([1280, 0], this.gamePlayer2);
+
     this.timer = 60;
     this.running = true;
     this.decrementTimer();
@@ -217,7 +218,6 @@ export class Game {
       }
     });
   }
-  // All good so far
 
   p1Movement() {
     // key inputs for player 1
@@ -297,7 +297,7 @@ export class Game {
         this.gamePlayer1.image != this.gamePlayer1.sprites.flinchright.image &&
         this.gamePlayer1.facing === "right"
       ) {
-        // this.spritehandler(this.gamePlayer1, "flinchRight");
+        this.spritehandler(this.gamePlayer1, "flinchRight");
       }
     }
     if (P1KEYS.e.pressed) {
@@ -529,6 +529,7 @@ export class Game {
       window.requestAnimationFrame(this.animate.bind(this, ctx));
 
       ctx.clearRect(0, 0, 1280, 620); //re-renders background
+      this.handleAudio(); // play pause button is controlled and reset per game.
 
       this.displayTimer();
       this.gamePlayer1.update(ctx);
@@ -538,22 +539,10 @@ export class Game {
       this.healthbar2.update(ctx); // changes the size of bar (o.g dependant on player)
 
       this.p1Movement();
-      if (this.mode === "dp") {
-        this.p2Movement();
-      } else {
-        this.aiMovement();
-      }
-      this.handleAudio(); // play pause button is controlled and reset per game.
+      this.mode === "dp" ? this.p2Movement() : this.aiMovement();
+
       this.gameOver(); // renders end screen on game over
     }
-  }
-
-  isGameOver() {
-    return (
-      this.gamePlayer1.health <= 0 ||
-      this.gamePlayer2.health <= 0 ||
-      this.timer <= 0
-    );
   }
 
   gameOver() {
@@ -563,28 +552,10 @@ export class Game {
       let end_screen = document.getElementById("end-screen");
       end_screen.style.display = "block";
 
-      let p = document.querySelector("#end-screen p");
-      if (this.winner() === "Tie") {
-        p.innerText = "Game Over. It was a tie!";
-      } else if (this.mode === "dp") {
-        p.innerText = `Game Over! ${this.winner()} has won!`;
-      } else if (this.mode === "sp" && this.winner() === "Player 1") {
-        p.innerText = "Game Over! You have won!";
-      } else {
-        p.innerText = "Game Over! The AI has won!";
-      }
+      this.handleWinner();
       let audio = document.getElementById("music");
       audio.pause();
     }
-  }
-
-  winner() {
-    if (this.gamePlayer1.health === this.gamePlayer2.health) {
-      return "Tie";
-    }
-    return this.gamePlayer1.health > this.gamePlayer2.health
-      ? "Player 1"
-      : "Player 2";
   }
 
   decrementTimer() {
@@ -604,22 +575,6 @@ export class Game {
     timer.id = "timer";
     timer.innerText = this.timer;
     game_cont.appendChild(timer);
-  }
-
-  handleAudio() {
-    let audio = document.getElementById("music");
-    let aud_but = document.getElementById("audio_button");
-    if (audio.paused) {
-      aud_but.innerHTML = "Play Music";
-      aud_but.onclick = () => {
-        audio.play();
-      };
-    } else {
-      aud_but.innerHTML = "Pause Music";
-      aud_but.onclick = () => {
-        audio.pause();
-      };
-    }
   }
 
   // helper functions!
@@ -676,5 +631,49 @@ export class Game {
         char.currFrame = 0;
         break;
     }
+  }
+
+  winner() {
+    if (this.gamePlayer1.health === this.gamePlayer2.health) {
+      return "Tie";
+    }
+    return this.gamePlayer1.health > this.gamePlayer2.health
+      ? "Player 1"
+      : "Player 2";
+  }
+
+  handleWinner() {
+    let p = document.querySelector("#end-screen p");
+    if (this.winner() === "Tie") {
+      p.innerText = "Game Over. It was a tie!";
+    } else if (this.mode === "dp") {
+      p.innerText = `Game Over! ${this.winner()} has won!`;
+    } else if (this.mode === "sp" && this.winner() === "Player 1") {
+      p.innerText = "Game Over! You have won!";
+    } else {
+      p.innerText = "Game Over! The AI has won!";
+    }
+  }
+  handleAudio() {
+    let audio = document.getElementById("music");
+    let aud_but = document.getElementById("audio_button");
+    if (audio.paused) {
+      aud_but.innerHTML = "Play Music";
+      aud_but.onclick = () => {
+        audio.play();
+      };
+    } else {
+      aud_but.innerHTML = "Pause Music";
+      aud_but.onclick = () => {
+        audio.pause();
+      };
+    }
+  }
+  isGameOver() {
+    return (
+      this.gamePlayer1.health <= 0 ||
+      this.gamePlayer2.health <= 0 ||
+      this.timer <= 0
+    );
   }
 }

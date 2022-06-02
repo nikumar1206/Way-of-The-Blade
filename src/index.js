@@ -33,7 +33,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   let start_butt_sp = document.getElementById("start_sp");
   start_butt_sp.onclick = () => {
-    console.log("clicked sp");
     const game = new Game("sp");
     const gameview = new GameView(ctx, game);
     gameview.startsp();
@@ -42,7 +41,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   let start_butt_dp = document.getElementById("start_dp");
   start_butt_dp.onclick = () => {
-    console.log("clicked dp");
     const game = new Game("dp");
     const gameview = new GameView(ctx, game);
     gameview.startdp();
