@@ -142,7 +142,7 @@ export class Game {
           totalSpriteFrames: 3,
         },
         death: {
-          imageSrc: "./assets/martialhero2/Sprites/death.png",
+          imageSrc: "./assets/martialhero2/Sprites/Death.png",
           totalSpriteFrames: 7,
         },
       }
