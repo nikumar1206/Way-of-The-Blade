@@ -17,7 +17,7 @@ export class Sprite {
     this.framesComplete = 0;
 
     this.framesElapsed = 0; // sprites change every 5 frames
-    this.framesHold = 5;
+    this.framesHold = 7;
   }
 
   drawSprite(ctx) {

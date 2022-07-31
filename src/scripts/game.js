@@ -272,20 +272,20 @@ export class Game {
     }
 
     if (P1KEYS.a.pressed) {
-      this.gamePlayer1.velX = -10;
+      this.gamePlayer1.velX = -8;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runLeft.image) {
         this.spritehandler(this.gamePlayer1, "runLeft");
       }
     }
 
     if (P1KEYS.d.pressed) {
-      this.gamePlayer1.velX = 10;
+      this.gamePlayer1.velX = 8;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runRight.image) {
         this.spritehandler(this.gamePlayer1, "runRight");
       }
     }
     if (P1KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
-      this.gamePlayer1.velY = -15;
+      this.gamePlayer1.velY = -12;
     }
     if (this.gamePlayer1.changePHB > 0) {
       if (
@@ -367,7 +367,7 @@ export class Game {
     }
 
     if (P2KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {
-      this.gamePlayer2.velY = -15;
+      this.gamePlayer2.velY = -12;
     }
 
     if (this.gamePlayer2.velY < 0) {
@@ -378,14 +378,14 @@ export class Game {
       }
     }
     if (P2KEYS.ArrowLeft.pressed) {
-      this.gamePlayer2.velX = -10;
+      this.gamePlayer2.velX = -8;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runLeft.image) {
         this.spritehandler(this.gamePlayer2, "runLeft");
       }
     }
 
     if (P2KEYS.ArrowRight.pressed) {
-      this.gamePlayer2.velX = 10;
+      this.gamePlayer2.velX = 8;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runRight.image) {
         this.spritehandler(this.gamePlayer2, "runRight");
       }
