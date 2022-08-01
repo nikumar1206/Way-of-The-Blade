@@ -1,5 +1,5 @@
 import { Sprite } from "./sprite";
-const GRAVITY = 0.75;
+import { GRAVITY } from "./utils";
 
 export class Player extends Sprite {
   constructor(

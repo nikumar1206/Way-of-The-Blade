@@ -1,35 +1,6 @@
 import { HealthBar } from "./healthbar";
 import { Player } from "./player";
-
-const P1KEYS = {
-  w: {
-    pressed: false,
-  },
-  a: {
-    pressed: false,
-  },
-  d: {
-    pressed: false,
-  },
-  e: {
-    pressed: false,
-  },
-};
-
-const P2KEYS = {
-  ArrowUp: {
-    pressed: false,
-  },
-  ArrowRight: {
-    pressed: false,
-  },
-  ArrowLeft: {
-    pressed: false,
-  },
-  Enter: {
-    pressed: false,
-  },
-};
+import { P1KEYS, P2KEYS, PLAYER_X_MOVEMENT, PLAYER_Y_MOVEMENT } from "./utils";
 
 export class Game {
   constructor(mode) {
@@ -272,20 +243,20 @@ export class Game {
     }
 
     if (P1KEYS.a.pressed) {
-      this.gamePlayer1.velX = -8;
+      this.gamePlayer1.velX = -PLAYER_X_MOVEMENT;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runLeft.image) {
         this.spritehandler(this.gamePlayer1, "runLeft");
       }
     }
 
     if (P1KEYS.d.pressed) {
-      this.gamePlayer1.velX = 8;
+      this.gamePlayer1.velX = PLAYER_X_MOVEMENT;
       if (this.gamePlayer1.image != this.gamePlayer1.sprites.runRight.image) {
         this.spritehandler(this.gamePlayer1, "runRight");
       }
     }
     if (P1KEYS.w.pressed && this.gamePlayer1.posY >= 350) {
-      this.gamePlayer1.velY = -12;
+      this.gamePlayer1.velY = -PLAYER_Y_MOVEMENT;
     }
     if (this.gamePlayer1.changePHB > 0) {
       if (
@@ -367,7 +338,7 @@ export class Game {
     }
 
     if (P2KEYS.ArrowUp.pressed && this.gamePlayer2.posY >= 350) {
-      this.gamePlayer2.velY = -12;
+      this.gamePlayer2.velY = -PLAYER_Y_MOVEMENT;
     }
 
     if (this.gamePlayer2.velY < 0) {
@@ -378,14 +349,14 @@ export class Game {
       }
     }
     if (P2KEYS.ArrowLeft.pressed) {
-      this.gamePlayer2.velX = -8;
+      this.gamePlayer2.velX = -PLAYER_X_MOVEMENT;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runLeft.image) {
         this.spritehandler(this.gamePlayer2, "runLeft");
       }
     }
 
     if (P2KEYS.ArrowRight.pressed) {
-      this.gamePlayer2.velX = 8;
+      this.gamePlayer2.velX = PLAYER_X_MOVEMENT;
       if (this.gamePlayer2.image != this.gamePlayer2.sprites.runRight.image) {
         this.spritehandler(this.gamePlayer2, "runRight");
       }
@@ -468,11 +439,10 @@ export class Game {
       this.spritehandler(this.gamePlayer2, "idleRight");
     }
 
-    let movement_const = 7;
     if (this.gamePlayer1.posX - this.gamePlayer2.posX > 0) {
-      this.gamePlayer2.velX = movement_const;
+      this.gamePlayer2.velX = PLAYER_X_MOVEMENT;
     } else {
-      this.gamePlayer2.velX = -movement_const;
+      this.gamePlayer2.velX = -PLAYER_X_MOVEMENT;
     }
 
     // if (
@@ -496,7 +466,7 @@ export class Game {
       Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
-      this.gamePlayer2.energy = 0;
+
       this.spritehandler(this.gamePlayer2, "attackright");
     } else if (
       this.gamePlayer2.facing === "left" &&
@@ -504,13 +474,14 @@ export class Game {
       Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
-      this.gamePlayer2.energy = 0;
+
       this.spritehandler(this.gamePlayer2, "attackleft");
     }
     this.gamePlayer2.energy += 1;
 
     if (this.gamePlayer1.changePHB > 5) {
-      this.gamePlayer1.changePHB += 15;
+      this.gamePlayer1.changePHB += 10;
+      this.gamePlayer2.energy = 0;
     }
   }
   // onDeath(char) {
