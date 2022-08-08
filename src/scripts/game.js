@@ -120,50 +120,52 @@ export class Game {
     );
     document.getElementById("pause_button").style.display = "block";
     document.getElementById("pause_button").onclick = () => {
-      this.running = !this.running
-      if (this.running){
+      this.running = !this.running;
+      if (this.running) {
         let i = 3;
         this.running = false;
         let img = document.createElement("img");
         img.src = "/assets/pause.svg";
         img.width = "60";
         img.height = "40";
-        img.id = "pause-toggle"
-        img.alt = "Play"
-        document.getElementById("pause_button").removeChild(document.getElementById("pause-toggle"))
-        document.getElementById("pause_button").appendChild(img)
+        img.id = "pause-toggle";
+        img.alt = "Play";
+        document
+          .getElementById("pause_button")
+          .removeChild(document.getElementById("pause-toggle"));
+        document.getElementById("pause_button").appendChild(img);
         document.getElementById("pause_button").disabled = true;
         document.getElementById("paused").innerText = "PAUSED";
         let timer = () => {
-          if (i === 0){
+          if (i === 0) {
             this.running = true;
             document.getElementById("paused").style.display = "none";
             document.getElementById("paused").innerText = "PAUSED";
             document.getElementById("paused").style.left = "46%";
             document.getElementById("pause_button").disabled = false;
-          }
-          else{
+          } else {
             document.getElementById("paused").style.left = "49%";
             document.getElementById("paused").innerText = i;
             i--;
             setTimeout(timer, 1000);
           }
-        }
+        };
         timer();
-      }
-      else{
+      } else {
         document.getElementById("paused").style.left = "46%";
         document.getElementById("paused").style.display = "block";
         let img = document.createElement("img");
         img.src = "/assets/play.svg";
         img.width = "60";
         img.height = "40";
-        img.id = "pause-toggle"
-        img.alt = "Play"
-        document.getElementById("pause_button").removeChild(document.getElementById("pause-toggle"))
-        document.getElementById("pause_button").appendChild(img)
+        img.id = "pause-toggle";
+        img.alt = "Play";
+        document
+          .getElementById("pause_button")
+          .removeChild(document.getElementById("pause-toggle"));
+        document.getElementById("pause_button").appendChild(img);
       }
-    }
+    };
     // window.gamePlayer1 = this.gamePlayer1;
     this.healthbar1 = new HealthBar([0, 0], this.gamePlayer1);
     this.healthbar2 = new HealthBar([1280, 0], this.gamePlayer2);
@@ -437,7 +439,7 @@ export class Game {
     }
   }
   aiMovement() {
-    let multiplyRandom = 2;
+    let multiplyRandom = 1.36;
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
@@ -485,24 +487,40 @@ export class Game {
     ) {
       this.spritehandler(this.gamePlayer2, "idleRight");
     }
-    if (this.gamePlayer1.velY === 0 && this.gamePlayer2.velY === 0){
-      if (this.gamePlayer1.posX > this.gamePlayer2.posX && ((1280 - this.gamePlayer1.posX) > this.gamePlayer1.posX - this.gamePlayer2.posX)) { //the human player is on the right side of the AI
-        this.gamePlayer2.velX = PLAYER_X_MOVEMENT - (Math.random() * multiplyRandom); //make the ai move right
-      } 
-      else if (this.gamePlayer1.posx > this.gamePlayer2.posX) { //the human player is on the left side of the AI
-        this.gamePlayer2.velX = -PLAYER_X_MOVEMENT + (Math.random() * multiplyRandom); //make the ai move left
-      }
-      else if (this.gamePlayer1.posX < this.gamePlayer2.posX && ((this.gamePlayer1.posX + 1280-this.gamePlayer2.posX) > this.gamePlayer2.posX - this.gamePlayer1.posX)){
-        this.gamePlayer2.velX = -PLAYER_X_MOVEMENT + (Math.random() * multiplyRandom);
-      }
-      else{
-        this.gamePlayer2.velX = PLAYER_X_MOVEMENT - (Math.random() * multiplyRandom);
+    if (this.gamePlayer1.velY === 0 && this.gamePlayer2.velY === 0) {
+      if (
+        this.gamePlayer1.posX > this.gamePlayer2.posX &&
+        1280 - this.gamePlayer1.posX >
+          this.gamePlayer1.posX - this.gamePlayer2.posX
+      ) {
+        //the human player is on the right side of the AI
+        this.gamePlayer2.velX =
+          PLAYER_X_MOVEMENT - Math.random() * multiplyRandom; //make the ai move right
+      } else if (this.gamePlayer1.posx > this.gamePlayer2.posX) {
+        //the human player is on the left side of the AI
+        this.gamePlayer2.velX =
+          -PLAYER_X_MOVEMENT + Math.random() * multiplyRandom; //make the ai move left
+      } else if (
+        this.gamePlayer1.posX < this.gamePlayer2.posX &&
+        this.gamePlayer1.posX + 1280 - this.gamePlayer2.posX >
+          this.gamePlayer2.posX - this.gamePlayer1.posX
+      ) {
+        this.gamePlayer2.velX =
+          -PLAYER_X_MOVEMENT + Math.random() * multiplyRandom;
+      } else {
+        this.gamePlayer2.velX =
+          PLAYER_X_MOVEMENT - Math.random() * multiplyRandom;
       }
     }
     // console.log(this.gamePlayer1.velY, this.gamePlayer2.velY)
-    if (this.gamePlayer1.posY < this.gamePlayer2.posY){
-      this.gamePlayer2.posY += -PLAYER_Y_MOVEMENT * (Math.random() * 1.158960124)
-      this.gamePlayer2.velY += -PLAYER_Y_MOVEMENT * (Math.random() * 1.158960124)
+    if (
+      this.gamePlayer1.posY < this.gamePlayer2.posY &&
+      this.gamePlayer2.velY === 0
+    ) {
+      this.gamePlayer2.posY +=
+        -PLAYER_Y_MOVEMENT * (Math.random() * 1.158960124);
+      this.gamePlayer2.velY +=
+        -PLAYER_Y_MOVEMENT * (Math.random() * 1.158960124);
     }
     if (this.gamePlayer2.velX > 0) {
       this.spritehandler(this.gamePlayer2, "runRight");
@@ -518,7 +536,7 @@ export class Game {
       Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
-      this.gamePlayer2.energy = Math.random()
+      this.gamePlayer2.energy = Math.random();
       this.spritehandler(this.gamePlayer2, "attackright");
     } else if (
       this.gamePlayer2.facing === "left" &&
@@ -526,12 +544,12 @@ export class Game {
       this.gamePlayer2.collisionWith(this.gamePlayer1)
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
-      this.gamePlayer2.energy = Math.random()
+      this.gamePlayer2.energy = Math.random();
       this.spritehandler(this.gamePlayer2, "attackleft");
     }
     this.gamePlayer2.energy += Math.random() * 0.9;
-    if (this.gamePlayer1.changePHB > 5){
-      this.gamePlayer1.changePHB += 5;
+    if (this.gamePlayer1.changePHB > 5) {
+      this.gamePlayer1.changePHB += 10;
     }
   }
   // onDeath(char) {
@@ -582,12 +600,12 @@ export class Game {
     }
   }
 
-  decrementTimer(){
-      setInterval(() => {
-        if (this.timer >= 1 && this.running) {
-          this.timer -= 1;
-        }
-      }, 1000);
+  decrementTimer() {
+    setInterval(() => {
+      if (this.timer >= 1 && this.running) {
+        this.timer -= 1;
+      }
+    }, 1000);
   }
 
   displayTimer() {
