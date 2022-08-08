@@ -125,7 +125,7 @@ export class Game {
         let i = 3;
         this.running = false;
         let img = document.createElement("img");
-        img.src = "/assets/pause.svg";
+        img.src = "assets/pause.svg";
         img.width = "60";
         img.height = "40";
         img.id = "pause-toggle";
@@ -155,7 +155,7 @@ export class Game {
         document.getElementById("paused").style.left = "46%";
         document.getElementById("paused").style.display = "block";
         let img = document.createElement("img");
-        img.src = "/assets/play.svg";
+        img.src = "assets/play.svg";
         img.width = "60";
         img.height = "40";
         img.id = "pause-toggle";
