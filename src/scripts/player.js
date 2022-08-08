@@ -35,7 +35,7 @@ export class Player extends Sprite {
       posX: this.posX,
       posY: this.posY,
       width: 120,
-      height: 120,
+      height: 90,
     };
 
     this.health = 100;
@@ -90,7 +90,7 @@ export class Player extends Sprite {
   xAxisCollisionWith(character2) {
     return (
       this.attackRange.posX + this.attackRange.width >= character2.posX &&
-      this.attackRange.posX <= character2.posX + character2.width
+      this.attackRange.posX - this.attackRange.width <= character2.posX + character2.width
     );
   }
 
@@ -123,7 +123,7 @@ export class Player extends Sprite {
 
   // for testing purposes
   // draw(ctx) {
-  //   // attack range
+  //   attack range
   //   ctx.fillStyle = "red";
   //   ctx.fillRect(
   //     this.attackRange.posX,

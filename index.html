@@ -14,11 +14,12 @@
     <img id="background_img" src="assets/lightwavejapan.gif" alt="">
     <div id="body-container">
         <h1>Way of the Blade</h1>
-        <img id ="canvas_img" src="assets/lightwavejapan.gif" width="1280" height="620">
+        <img id="canvas_img" src="assets/lightwavejapan.gif" width="1280" height="620" alt="Background Image.">
 
         <div id="game-container">
             <div>
                 <button type="button" id="audio_button">Pause Music</button>
+                <button type="button" id="pause_button"><img alt="Pause" src="assets/pause.svg" width="60" height="40" id="pause-toggle"/></button>
             </div>
             <div class= "splash" id="starting-splash">
                 <p>Welcome to Way of the Blade, a game inspired by Japanese animation!</p>
@@ -40,9 +41,8 @@
             </div>
 
             <canvas id="canvasEl"></canvas>
-
-
-            <div class = "splash" id="end-screen">
+            <h1 id="paused">PAUSED</h1>
+            <div class="splash" id="end-screen">
                 <p></p>
                 <button type="button" class="game-button" id="homescreen">Go to Home Screen</button>
                 </p>
@@ -66,7 +66,7 @@
         <div id="footer">
             <p>Built using HTML5 Canvas, CSS3, and Javascript</p>
             <p>@ Nikhil Kumar 2022</p>
-        <//div>
+        </div>
 </div>
     <audio id = "music" src="assets/audio/genkai.mp3" preload="auto"></audio>
 </body>

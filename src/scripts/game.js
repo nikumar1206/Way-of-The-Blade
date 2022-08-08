@@ -6,7 +6,7 @@ export class Game {
   constructor(mode) {
     this.mode = mode;
     this.gamePlayer1 = new Player(
-      [25, 0],
+      [140, 0],
       [150, 125],
       [0, 0],
       "right",
@@ -63,7 +63,7 @@ export class Game {
     );
 
     this.gamePlayer2 = new Player(
-      [1200, 0],
+      [1000, 0],
       [150, 125],
       [0, 0],
       "left",
@@ -118,6 +118,52 @@ export class Game {
         },
       }
     );
+    document.getElementById("pause_button").style.display = "block";
+    document.getElementById("pause_button").onclick = () => {
+      this.running = !this.running
+      if (this.running){
+        let i = 3;
+        this.running = false;
+        let img = document.createElement("img");
+        img.src = "/assets/pause.svg";
+        img.width = "60";
+        img.height = "40";
+        img.id = "pause-toggle"
+        img.alt = "Play"
+        document.getElementById("pause_button").removeChild(document.getElementById("pause-toggle"))
+        document.getElementById("pause_button").appendChild(img)
+        document.getElementById("pause_button").disabled = true;
+        document.getElementById("paused").innerText = "PAUSED";
+        let timer = () => {
+          if (i === 0){
+            this.running = true;
+            document.getElementById("paused").style.display = "none";
+            document.getElementById("paused").innerText = "PAUSED";
+            document.getElementById("paused").style.left = "46%";
+            document.getElementById("pause_button").disabled = false;
+          }
+          else{
+            document.getElementById("paused").style.left = "49%";
+            document.getElementById("paused").innerText = i;
+            i--;
+            setTimeout(timer, 1000);
+          }
+        }
+        timer();
+      }
+      else{
+        document.getElementById("paused").style.left = "46%";
+        document.getElementById("paused").style.display = "block";
+        let img = document.createElement("img");
+        img.src = "/assets/play.svg";
+        img.width = "60";
+        img.height = "40";
+        img.id = "pause-toggle"
+        img.alt = "Play"
+        document.getElementById("pause_button").removeChild(document.getElementById("pause-toggle"))
+        document.getElementById("pause_button").appendChild(img)
+      }
+    }
     // window.gamePlayer1 = this.gamePlayer1;
     this.healthbar1 = new HealthBar([0, 0], this.gamePlayer1);
     this.healthbar2 = new HealthBar([1280, 0], this.gamePlayer2);
@@ -391,6 +437,7 @@ export class Game {
     }
   }
   aiMovement() {
+    let multiplyRandom = 2;
     if (
       this.gamePlayer2.image === this.gamePlayer2.sprites.attack1right.image &&
       this.gamePlayer2.currFrame < this.gamePlayer2.totalSpriteFrames - 1
@@ -438,20 +485,25 @@ export class Game {
     ) {
       this.spritehandler(this.gamePlayer2, "idleRight");
     }
-
-    if (this.gamePlayer1.posX - this.gamePlayer2.posX > 0) {
-      this.gamePlayer2.velX = PLAYER_X_MOVEMENT;
-    } else {
-      this.gamePlayer2.velX = -PLAYER_X_MOVEMENT;
+    if (this.gamePlayer1.velY === 0 && this.gamePlayer2.velY === 0){
+      if (this.gamePlayer1.posX > this.gamePlayer2.posX && ((1280 - this.gamePlayer1.posX) > this.gamePlayer1.posX - this.gamePlayer2.posX)) { //the human player is on the right side of the AI
+        this.gamePlayer2.velX = PLAYER_X_MOVEMENT - (Math.random() * multiplyRandom); //make the ai move right
+      } 
+      else if (this.gamePlayer1.posx > this.gamePlayer2.posX) { //the human player is on the left side of the AI
+        this.gamePlayer2.velX = -PLAYER_X_MOVEMENT + (Math.random() * multiplyRandom); //make the ai move left
+      }
+      else if (this.gamePlayer1.posX < this.gamePlayer2.posX && ((this.gamePlayer1.posX + 1280-this.gamePlayer2.posX) > this.gamePlayer2.posX - this.gamePlayer1.posX)){
+        this.gamePlayer2.velX = -PLAYER_X_MOVEMENT + (Math.random() * multiplyRandom);
+      }
+      else{
+        this.gamePlayer2.velX = PLAYER_X_MOVEMENT - (Math.random() * multiplyRandom);
+      }
     }
-
-    // if (
-    //   Math.abs(this.gamePlayer1.posY - this.gamePlayer2.posY) > 10 &&
-    //   this.gamePlayer2.energy > 1
-    // ) {
-    //   this.gamePlayer2.posY = -1;
-    //   this.gamePlayer2.energy = 0;
-    // } jump handler broken
+    // console.log(this.gamePlayer1.velY, this.gamePlayer2.velY)
+    if (this.gamePlayer1.posY < this.gamePlayer2.posY){
+      this.gamePlayer2.posY += -PLAYER_Y_MOVEMENT * (Math.random() * 1.158960124)
+      this.gamePlayer2.velY += -PLAYER_Y_MOVEMENT * (Math.random() * 1.158960124)
+    }
     if (this.gamePlayer2.velX > 0) {
       this.spritehandler(this.gamePlayer2, "runRight");
       this.gamePlayer2.facing = "right";
@@ -466,22 +518,20 @@ export class Game {
       Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
-
+      this.gamePlayer2.energy = Math.random()
       this.spritehandler(this.gamePlayer2, "attackright");
     } else if (
       this.gamePlayer2.facing === "left" &&
       this.gamePlayer2.energy > 1 &&
-      Math.abs(this.gamePlayer1.posX - this.gamePlayer2.posX) < 125
+      this.gamePlayer2.collisionWith(this.gamePlayer1)
     ) {
       this.gamePlayer2.attack(this.gamePlayer1);
-
+      this.gamePlayer2.energy = Math.random()
       this.spritehandler(this.gamePlayer2, "attackleft");
     }
-    this.gamePlayer2.energy += 1;
-
-    if (this.gamePlayer1.changePHB > 5) {
-      this.gamePlayer1.changePHB += 10;
-      this.gamePlayer2.energy = 0;
+    this.gamePlayer2.energy += Math.random() * 0.9;
+    if (this.gamePlayer1.changePHB > 5){
+      this.gamePlayer1.changePHB += 5;
     }
   }
   // onDeath(char) {
@@ -496,10 +546,13 @@ export class Game {
   // }
 
   animate(ctx) {
+    window.requestAnimationFrame(this.animate.bind(this, ctx));
     if (this.running) {
-      window.requestAnimationFrame(this.animate.bind(this, ctx));
-
       ctx.clearRect(0, 0, 1280, 620); //re-renders background
+      // ctx.fillRect(this.gamePlayer1.attackRange.posX, this.gamePlayer1.attackRange.posY, this.gamePlayer1.attackRange.width, this.gamePlayer1.attackRange.height);
+      // ctx.fillRect(this.gamePlayer2.attackRange.posX, this.gamePlayer2.attackRange.posY, this.gamePlayer2.attackRange.width, this.gamePlayer2.attackRange.height);
+      // ctx.fillRect(this.gamePlayer1.posX, this.gamePlayer1.posY, 5, 5);
+      // ctx.fillRect(this.gamePlayer2.posX, this.gamePlayer2.posY, 5, 5);
       this.handleAudio(); // play pause button is controlled and reset per game.
 
       this.displayTimer();
@@ -519,7 +572,7 @@ export class Game {
   gameOver() {
     if (this.isGameOver()) {
       this.running = false;
-
+      document.getElementById("pause_button").style.display = "none";
       let end_screen = document.getElementById("end-screen");
       end_screen.style.display = "block";
 
@@ -529,12 +582,12 @@ export class Game {
     }
   }
 
-  decrementTimer() {
-    setInterval(() => {
-      if (this.timer >= 1) {
-        this.timer -= 1;
-      }
-    }, 1000);
+  decrementTimer(){
+      setInterval(() => {
+        if (this.timer >= 1 && this.running) {
+          this.timer -= 1;
+        }
+      }, 1000);
   }
 
   displayTimer() {
@@ -620,9 +673,9 @@ export class Game {
     } else if (this.mode === "dp") {
       p.innerText = `Game Over! ${this.winner()} has won!`;
     } else if (this.mode === "sp" && this.winner() === "Player 1") {
-      p.innerText = "Game Over! You have won!";
+      p.innerText = "Game Over! You won!";
     } else {
-      p.innerText = "Game Over! The AI has won!";
+      p.innerText = "Game Over! The AI won!";
     }
   }
   handleAudio() {

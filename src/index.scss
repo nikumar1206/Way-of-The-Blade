@@ -23,6 +23,7 @@ canvas, #canvas_img {
     align-content: center;
     transform: translate(-50%, -50%);
     border: 2px solid black;
+    z-index: -1;
 }
 
 html, body {
@@ -72,10 +73,22 @@ h1 {
     text-align: center;
     transform: translate(-50%, -50%);
 }
-#audio_button:hover {
+#pause_button{
+    z-index: 5;
+    position: absolute;
+    top: 19%;
+    left: 8%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: none;
+}
+#audio_button:hover, #pause_button:hover {
     color: pink;
 }
-
+#pause_button:focus{
+    outline: none;
+}
 .game-button:hover {
     background-color: pink;
     transform: scale(1.5);
@@ -98,6 +111,16 @@ button {
     right: 48%;
     transform: translate(-50%, -50%);
 }
-
-
-
+#paused{
+    z-index: 4;
+    position: absolute;
+    font-size: 30px;
+    justify-content: center;
+    align-self: center;
+    vertical-align: middle;
+    top: 47%;
+    left: 46%;
+    font-size: 3rem;
+    display: none;
+    padding: 0.25rem;
+}
